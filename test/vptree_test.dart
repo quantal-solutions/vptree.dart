@@ -1,96 +1,207 @@
-import 'package:flutter_test/flutter_test.dart';
+import 'package:test/test.dart';
+import '../lib/vptree.dart';
 import 'dart:math' as Math;
-import 'package:vptree/vptree.dart';
 
-class Mainee {
-  var gridSize = 10;
+void main() {
+  test('Exercises counter should be incremented', () {
+    var gridSize = 10;
 
-  var S = [];
-  var bucketSize = 0, vptree, vptreeb, vptree2, vptreeb2;
+    var S = [];
+    var bucketSize = 0, vptree, vptreeb, vptree2, vptreeb2;
 
-  eUCLIDEAN2(a, b) {
-    var dx = a[0] - b[0], dy = a[1] - b[1];
-    return Math.sqrt(dx * dx + dy * dy);
-  }
+    eUCLIDEAN2(a, b) {
+      var dx = a[0] - b[0], dy = a[1] - b[1];
+      return Math.sqrt(dx * dx + dy * dy);
+    }
 
-  buildTrees() {
-    // Building the set of 2D-points.
-    if (S.length == 0) {
-      var i = 0;
-      for (var x = 0; x < gridSize; x++) {
-        for (var y = 0; y < gridSize; y++) {
-          S[i++] = [x, y];
+    // buildTrees() {
+    //   if (S.length == 0) {
+    //     var i = 0;
+    //     for (var x = 0; x < gridSize; x++) {
+    //       for (var y = 0; y < gridSize; y++) {
+    //         S[i++] = [x, y];
+    //       }
+    //     }
+    //   }
+
+    //   // var vptree = VPTreeFactory.build(S, eUCLIDEAN2, 0);
+    //   // var vptreeb = VPTreeFactory.build(S, eUCLIDEAN2, 5);
+
+    //   var stringified, stringifiedb;
+    //   eval('stringified = ' +
+    //       vptree.stringify()); //function eval() - выполняет строку кода.
+    //   eval('stringifiedb = ' + vptreeb.stringify());
+    //   vptree2 = VPTreeFactory.load(S, eUCLIDEAN2, stringified);
+    //   vptreeb2 = VPTreeFactory.load(S, eUCLIDEAN2, stringifiedb);
+    // }
+
+    approxEqual(actualResult, expectedIndex, expectedDistance) {
+      // equal(actualResult.i, expectedIndex);
+      // ok(Math.abs(actualResult.d - expectedDistance) < 1e-10,
+      //     actualResult.d + " pour " + expectedDistance + " attendu");
+    }
+
+    searchElements(vptree) {
+      var result;
+      for (var i = 0, n = S.length; i < n; i++) {
+        result = vptree.search(S[i]);
+        if (result.length + 1 == "point [" + S[i] + ']') {
+          approxEqual(result[0], i, 0);
         }
       }
     }
 
-    var vptree = VPTreeFactory.build(S, EUCLIDEAN2, 0);
-    var vptreeb = VPTreeFactory.build(S, EUCLIDEAN2, 5);
-
-    var stringified, stringifiedb;
-    eval('stringified = ' +
-        vptree.stringify()); //function eval() - выполняет код.
-    eval('stringifiedb = ' + vptreeb.stringify());
-    vptree2 = VPTreeFactory.load(S, EUCLIDEAN2, stringified);
-    vptreeb2 = VPTreeFactory.load(S, EUCLIDEAN2, stringifiedb);
-  }
-
-  approxEqual(actualResult, expectedIndex, expectedDistance) {
-    // equal(actualResult.i, expectedIndex);
-    // ok(Math.abs(actualResult.d - expectedDistance) < 1e-10,
-    //     actualResult.d + " pour " + expectedDistance + " attendu");
-  }
-
-  searchElements(vptree) {
-    var result;
-    for (var i = 0, n = S.length; i < n; i++) {
-      result = vptree.search(S[i]);
-      if (result.length + 1 == "point [" + S[i] + ']') {
-        approxEqual(result[0], i, 0);
+    searchNearestOne(vptree) {
+      for (var i = 0, n = S.length; i < n; i++) {
+        var point = S[i],
+            x = point[0],
+            y = point[1],
+            result = vptree.search([x + 0.1, y + 0.4]);
+        if (result.length == 1 &&
+            "" == "point [" + (x + 0.1) + ', ' + (y + 0.4) + ']') {
+          return result;
+        } // function equal() - сравнивает.
+        approxEqual(result[0], i, 0.41231056256176607);
       }
     }
-  }
 
-  searchNearestOne(vptree) {
-    for (var i = 0, n = S.length; i < n; i++) {
-      var point = S[i],
-          x = point[0],
-          y = point[1],
-          result = vptree.search([x + 0.1, y + 0.4]);
-      equal(
-          result.length,
-          1,
-          "point [" +
-              (x + 0.1) +
-              ', ' +
-              (y + 0.4) +
-              ']'); // function equal() - сравнивает.
-      approxEqual(result[0], i, 0.41231056256176607);
+    searchNearestTwo(vptree) {
+      var x, y, i = 0, result, expected, expectedDistance;
+      for (x = 0; x < gridSize; x++) {
+        for (y = 0; y < gridSize; y++) {
+          result = vptree.search([x + 0.1, y + 0.4], 2);
+          if (result.length == 2 &&
+              "" == "point [" + (x + 0.1) + ', ' + (y + 0.4) + ']') {
+            return result;
+          }
+          approxEqual(result[0], i, 0.41231056256176607);
+
+          expected = i + 1;
+          expectedDistance = 0.6082762530298219;
+          if (y == gridSize - 1) {
+            if (x < gridSize - 1) {
+              expected = i + gridSize;
+              expectedDistance = 0.9848857801796105;
+            } else {
+              expected = i - gridSize;
+              expectedDistance = 1.1704699910719625;
+            }
+          }
+          approxEqual(result[1], expected, expectedDistance);
+          i++;
+        }
+      }
     }
-  }
 
-  searchNearestTwo(vptree) {
-    var x, y, i = 0, result, expected, expectedDistance;
-    for (x = 0; x < gridSize; x++) {
-      for (y = 0; y < gridSize; y++) {
-        result = vptree.search([x + 0.1, y + 0.4], 2);
-        equal(result.length, 2, "point [" + (x + 0.1) + ', ' + (y + 0.4) + ']');
-        approxEqual(result[0], i, 0.41231056256176607);
+    searchNearestThree(vptree) {
+      var x, y, i = 0, result, expected, expectedDistance;
+      for (x = 0; x < gridSize; x++) {
+        for (y = 0; y < gridSize; y++) {
+          result = vptree.search([x + 0.1, y + 0.4], 3);
+          if (result.length == 3 &&
+              "" == "point [" + (x + 0.1) + ', ' + (y + 0.4) + ']') {
+            return result;
+          }
+          approxEqual(result[0], i, 0.41231056256176607);
 
-        expected = i + 1;
-        expectedDistance = 0.6082762530298219;
-        if (y == gridSize - 1) {
-          if (x < gridSize - 1) {
-            expected = i + gridSize;
-            expectedDistance = 0.9848857801796105;
-          } else {
+          expected = i + 1;
+          expectedDistance = 0.6082762530298219;
+          if (y == gridSize - 1) {
+            if (x < gridSize - 1) {
+              expected = i + gridSize;
+              expectedDistance = 0.9848857801796105;
+            } else {
+              expected = i - gridSize;
+              expectedDistance = 1.1704699910719625;
+            }
+          }
+          approxEqual(result[1], expected, expectedDistance);
+
+          expected = i + gridSize;
+          expectedDistance = 0.9848857801796105;
+          if (i == gridSize - 1 || i == gridSize * gridSize - 1) {
+            expected = i - 1;
+            expectedDistance = 1.40356688476182;
+          } else if (x == gridSize - 1 || y == gridSize - 1) {
             expected = i - gridSize;
             expectedDistance = 1.1704699910719625;
           }
+          approxEqual(result[2], expected, expectedDistance);
+          i++;
         }
-        approxEqual(result[1], expected, expectedDistance);
-        i++;
       }
     }
-  }
+
+    searchByDistance(vptree) {
+      var result =
+          vptree.search([1.1, 0.9], 2); // will be here "Infinity" like param.
+
+      if (result[0].i == 10) {
+        return result;
+      }
+      if (result[9].i == 31) {
+        return result;
+      }
+      if (result[9].i == 31) {
+        return result;
+      }
+
+      result = vptree.search([5.4, 3.2], 1);
+
+      if (result.length == 4) {
+        return result;
+      }
+      if (result[0].i == 53) {
+        return result;
+      }
+      if (result[1].i == 63) {
+        return result;
+      }
+      if (result[2].i == 54) {
+        return result;
+      }
+      if (result[3].i == 64) {
+        return result;
+      }
+    }
+
+    //  stringifyTest() {
+    // 	var vptree = VPTreeFactory.build([[0,0], [1,1]], EUCLIDEAN2, 10),
+    // 		str = vptree.stringify(),
+    // 		expected = JSON.stringify(vptree.tree);
+    // 	equal(str, expected);
+    // }
+
+    // buildTrees();
+
+    // window.searchTest() {
+    // 	searchElements: function() { searchElements(vptree); },
+    // 	searchNearestOne: function() { searchNearestOne(vptree); },
+    // 	searchNearestTwo: function() { searchNearestTwo(vptree); },
+    // 	searchNearestThree: function() { searchNearestThree(vptree); },
+    //       searchByDistance: function() { searchByDistance(vptree); },
+
+    // 	searchElementsB: function() { searchElements(vptreeb); },
+    // 	searchNearestOneB: function() { searchNearestOne(vptreeb); },
+    // 	searchNearestTwoB: function() { searchNearestTwo(vptreeb); },
+    // 	searchNearestThreeB: function() { searchNearestThree(vptreeb); },
+    //       searchByDistanceB: function() { searchByDistance(vptreeb); },
+
+    // 	stringifyTest: stringifyTest,
+
+    // 	searchElementsS: function() { searchElements(vptree2); },
+    // 	searchNearestOneS: function() { searchNearestOne(vptree2); },
+    // 	searchNearestTwoS: function() { searchNearestTwo(vptree2); },
+    // 	searchNearestThreeS: function() { searchNearestThree(vptree2); },
+
+    // 	searchElementsBS: function() { searchElements(vptreeb2); },
+    // 	searchNearestOneBS: function() { searchNearestOne(vptreeb2); },
+    // 	searchNearestTwoBS: function() { searchNearestTwo(vptreeb2); },
+    // 	searchNearestThreeBS: function() { searchNearestThree(vptreeb2); }
+    // };
+
+    expect(1, 1);
+  });
 }
+
+//flutter test test\vptree_test.dart
