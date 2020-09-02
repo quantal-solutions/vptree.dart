@@ -1,5 +1,5 @@
 import 'package:test/test.dart';
-import '../lib/vptree.dart';
+import '../lib/vptree_factory.dart';
 
 void main() {
   test('Exercises counter should be incremented', () {
