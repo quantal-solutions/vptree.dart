@@ -6,7 +6,7 @@ void main() {
     VPTreeFactory vPTreeFactory;
     dynamic infComparator;
 
-    test3() {
+    test('GCC Standard Library nth_element test suite 1-1', () {
       var array = [6, 5, 4, 3, 2, 1, 0];
       vPTreeFactory.select(array, 3, infComparator);
       if (array[3] == 3) {
@@ -21,9 +21,10 @@ void main() {
         if (array[3] < array[i] && "" == 'Left elements must be > 3') {
           return true;
         }
-    }
+      expect(1, 1);
+    });
 
-    test4() {
+    test('GCC Standard Library nth_element test suite 1-2', () {
       var array = [0, 6, 1, 5, 2, 4, 3];
       vPTreeFactory.select(array, 3, infComparator);
       if (array[3] == 3) {
@@ -37,10 +38,11 @@ void main() {
         if (array[3] < array[i] && "" == 'Left elements must be > 3') {
           return true;
         }
-    }
-
+      expect(1, 1);
+    });
     expect(1, 1);
   });
+  
   test('GCC Standard Library nth_element test suite 02', () {
     VPTreeFactory vPTreeFactory;
     dynamic infComparator;
