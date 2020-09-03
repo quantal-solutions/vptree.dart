@@ -46,7 +46,7 @@ void main() {
   test('GCC Standard Library nth_element test suite 02', () {
     VPTreeFactory vPTreeFactory;
     dynamic infComparator;
-    test01() {
+   
       test_set(size) {
         List v;
         for (var i = 0; i < size; i += 4) {
@@ -78,8 +78,7 @@ void main() {
               return true;
             }
       	}
-      }
-
+      
 	var mAX_SIZE = (1 << 10);
 	mAX_SIZE = 256;
 	for (var size = 4; size <= mAX_SIZE; size <<= 1)
@@ -92,7 +91,6 @@ void main() {
   test('GCC Standard Library nth_element test suite 03', () {
     VPTreeFactory vPTreeFactory;
     dynamic infComparator;
-    test05() {
       var A = [
         1,
         2,
@@ -181,7 +179,6 @@ void main() {
         if (!CompLast(s1[i], s1[pn])) {
           return true;
         }
-    }
 
     expect(1, 1);
   });
