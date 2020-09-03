@@ -9,4 +9,10 @@ class VPTreeFactory {
   load(List<dynamic> element, int bucketSize, computeDistanceCallback) {
     return new VPTreeFactory();
   }
+
+  infComparator(a, b) {
+    return a < b;
+  }
+
+  select(List array, int k, infComparator) {}
 }
