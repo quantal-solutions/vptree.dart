@@ -64,7 +64,7 @@ void main() {
         }
 
         for (var i = j; i < v.length; i++) {
-          expect(!(v[j] > v[i]), equals(true));
+          expect(v[i] >= v[j], equals(true));
         }
       }
       var maxSize = (1 << 10);
