@@ -3,15 +3,12 @@ import '../lib/vptree_factory.dart';
 import 'dart:math' as Math;
 
 void main() {
-  test('Exercises counter should be incremented', () {
+  test('eUCLIDEAN2 + buildTrees 1.0', () {
     VPTreeFactory vpTreeFactory;
     List<dynamic> element;
     dynamic computeDistanceCallback;
 
     var gridSize = 10;
-
-    // var S = [];
-    // var bucketSize = 0, vptree, vptreeb, vptree2, vptreeb2;
 
     eUCLIDEAN2(a, b) {
       var dx = a[0] - b[0], dy = a[1] - b[1];
@@ -41,6 +38,10 @@ void main() {
           vpTreeFactory.load(element, computeDistanceCallback, stringifiedb);
     }
 
+    expect(1, 1);
+  });
+  test('Search elements 2.0', () {
+    List<dynamic> element;
     approxEqual(actualResult, expectedIndex, expectedDistance) {
       if (actualResult.i == expectedIndex) {
         print('true');
@@ -60,6 +61,19 @@ void main() {
       }
     }
 
+    expect(1, 1);
+  });
+  test('Search nearest one 3.0', () {
+    List<dynamic> element;
+    approxEqual(actualResult, expectedIndex, expectedDistance) {
+      if (actualResult.i == expectedIndex) {
+        print('true');
+      }
+
+      if ((actualResult.d - expectedDistance).abs() < 1e-10 &&
+          actualResult.d + " pour " + expectedDistance + " attendu") {}
+    }
+
     searchNearestOne(vptree) {
       for (var i = 0, n = element.length; i < n; i++) {
         var point = element[i],
@@ -69,9 +83,21 @@ void main() {
         if (result.length == 1 &&
             "" == "point [" + (x + 0.1) + ', ' + (y + 0.4) + ']') {
           return result;
-        } // function equal() - сравнивает.
+        }
         approxEqual(result[0], i, 0.41231056256176607);
       }
+    }
+
+    expect(1, 1);
+  });
+  test('Search nearest two 4.0', () {
+    var gridSize = 10;
+    approxEqual(actualResult, expectedIndex, expectedDistance) {
+      if (actualResult.i == expectedIndex) {
+        print('true');
+      }
+      if ((actualResult.d - expectedDistance).abs() < 1e-10 &&
+          actualResult.d + " pour " + expectedDistance + " attendu") {}
     }
 
     searchNearestTwo(vptree) {
@@ -100,6 +126,18 @@ void main() {
           i++;
         }
       }
+    }
+
+    expect(1, 1);
+  });
+  test('Search  nearest three 5.0', () {
+    var gridSize = 10;
+    approxEqual(actualResult, expectedIndex, expectedDistance) {
+      if (actualResult.i == expectedIndex) {
+        print('true');
+      }
+      if ((actualResult.d - expectedDistance).abs() < 1e-10 &&
+          actualResult.d + " pour " + expectedDistance + " attendu") {}
     }
 
     searchNearestThree(vptree) {
@@ -141,9 +179,11 @@ void main() {
       }
     }
 
+    expect(1, 1);
+  });
+  test('Exercises counter should be incremented 2.0', () {
     searchByDistance(vptree) {
-      var result =
-          vptree.search([1.1, 0.9], 2); // will be here "Infinity" like param.
+      var result = vptree.search([1.1, 0.9], 2);
 
       if (result[0].i == 10) {
         return result;
@@ -173,41 +213,6 @@ void main() {
         return result;
       }
     }
-
-    //  stringifyTest() {
-    // 	var vptree = VPTreeFactory.build([[0,0], [1,1]], EUCLIDEAN2, 10),
-    // 		str = vptree.stringify(),
-    // 		expected = JSON.stringify(vptree.tree);
-    // 	equal(str, expected);
-    // }
-
-    // buildTrees();
-
-    // window.searchTest() {
-    // 	searchElements: function() { searchElements(vptree); },
-    // 	searchNearestOne: function() { searchNearestOne(vptree); },
-    // 	searchNearestTwo: function() { searchNearestTwo(vptree); },
-    // 	searchNearestThree: function() { searchNearestThree(vptree); },
-    //       searchByDistance: function() { searchByDistance(vptree); },
-
-    // 	searchElementsB: function() { searchElements(vptreeb); },
-    // 	searchNearestOneB: function() { searchNearestOne(vptreeb); },
-    // 	searchNearestTwoB: function() { searchNearestTwo(vptreeb); },
-    // 	searchNearestThreeB: function() { searchNearestThree(vptreeb); },
-    //       searchByDistanceB: function() { searchByDistance(vptreeb); },
-
-    // 	stringifyTest: stringifyTest,
-
-    // 	searchElementsS: function() { searchElements(vptree2); },
-    // 	searchNearestOneS: function() { searchNearestOne(vptree2); },
-    // 	searchNearestTwoS: function() { searchNearestTwo(vptree2); },
-    // 	searchNearestThreeS: function() { searchNearestThree(vptree2); },
-
-    // 	searchElementsBS: function() { searchElements(vptreeb2); },
-    // 	searchNearestOneBS: function() { searchNearestOne(vptreeb2); },
-    // 	searchNearestTwoBS: function() { searchNearestTwo(vptreeb2); },
-    // 	searchNearestThreeBS: function() { searchNearestThree(vptreeb2); }
-    // };
 
     expect(1, 1);
   });

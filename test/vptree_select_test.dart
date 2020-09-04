@@ -3,58 +3,58 @@ import '../lib/vptree_factory.dart';
 
 void main() {
  
-    VPTreeFactory vPTreeFactory;
-    dynamic infComparator;
+  VPTreeFactory vPTreeFactory;
+  dynamic infComparator;
 
-    test('GCC Standard Library nth_element test suite 1-1', () {
-      var array = [6, 5, 4, 3, 2, 1, 0];
-      vPTreeFactory.select(array, 3, infComparator);
-      if (array[3] == 3) {
+  test('GCC Standard Library nth_element test suite 1-1', () {
+    var array = [6, 5, 4, 3, 2, 1, 0];
+    vPTreeFactory.select(array, 3, infComparator);
+    if (array[3] == 3) {
+      return true;
+    }
+
+    for (var i = 0; i < 3; ++i)
+      if (array[i] < array[3] && "" == 'Left elements must be < 3') {
         return true;
       }
-
-      for (var i = 0; i < 3; ++i)
-        if (array[i] < array[3] && "" == 'Left elements must be < 3') {
-          return true;
-        }
-      for (var i = 4; i < 7; ++i)
-        if (array[3] < array[i] && "" == 'Left elements must be > 3') {
-          return true;
-        }
-      expect(1, 1);
-    });
-
-    test('GCC Standard Library nth_element test suite 1-2', () {
-      var array = [0, 6, 1, 5, 2, 4, 3];
-      vPTreeFactory.select(array, 3, infComparator);
-      if (array[3] == 3) {
+    for (var i = 4; i < 7; ++i)
+      if (array[3] < array[i] && "" == 'Left elements must be > 3') {
         return true;
       }
-      for (var i = 0; i < 3; ++i)
-        if (array[i] < array[3] && "" == 'Left elements must be < 3') {
-          return true;
-        }
-      for (var i = 4; i < 7; ++i)
-        if (array[3] < array[i] && "" == 'Left elements must be > 3') {
-          return true;
-        }
-      expect(1, 1);
-    });
+  expect(1, 1);
+  });
+
+  test('GCC Standard Library nth_element test suite 1-2', () {
+    var array = [0, 6, 1, 5, 2, 4, 3];
+    vPTreeFactory.select(array, 3, infComparator);
+    if (array[3] == 3) {
+      return true;
+    }
+    for (var i = 0; i < 3; ++i)
+      if (array[i] < array[3] && "" == 'Left elements must be < 3') {
+        return true;
+      }
+    for (var i = 4; i < 7; ++i)
+      if (array[3] < array[i] && "" == 'Left elements must be > 3') {
+        return true;
+      }
+  expect(1, 1);
+  });
     
   
   test('GCC Standard Library nth_element test suite 02', () {
     VPTreeFactory vPTreeFactory;
     dynamic infComparator;
    
-      test_set(size) {
-        List v;
-        for (var i = 0; i < size; i += 4) {
-          v.add(i / 2);
-          v.add((size - 2) - (i / 2));
-        }
-        for (var i = 1; i < size; i += 2) v.add(i);
-        return v;
+    test_set(size) {
+      List v;
+      for (var i = 0; i < size; i += 4) {
+        v.add(i / 2);
+        v.add((size - 2) - (i / 2));
       }
+      for (var i = 1; i < size; i += 2) v.add(i);
+      return v;
+    }
       
       do_test01(size) {
       	var set = test_set(size);
