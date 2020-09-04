@@ -142,37 +142,35 @@ void main() {
 
     expect(1, 1);
   });
-  test('Exercises counter should be incremented 2.0', () {
-    searchByDistance(vptree) {
-      var result = vptree.search([1.1, 0.9], 2);
+  test('Exercises counter should be incremented 6.0', () {
+    var result = vptree.search([1.1, 0.9], 2);
 
-      if (result[0].i == 10) {
-        return result;
-      }
-      if (result[9].i == 31) {
-        return result;
-      }
-      if (result[9].i == 31) {
-        return result;
-      }
+    if (result[0].i == 10) {
+      return result;
+    }
+    if (result[9].i == 31) {
+      return result;
+    }
+    if (result[9].i == 31) {
+      return result;
+    }
 
-      result = vptree.search([5.4, 3.2], 1);
+    result = vptree.search([5.4, 3.2], 1);
 
-      if (result.length == 4) {
-        return result;
-      }
-      if (result[0].i == 53) {
-        return result;
-      }
-      if (result[1].i == 63) {
-        return result;
-      }
-      if (result[2].i == 54) {
-        return result;
-      }
-      if (result[3].i == 64) {
-        return result;
-      }
+    if (result.length == 4) {
+      return result;
+    }
+    if (result[0].i == 53) {
+      return result;
+    }
+    if (result[1].i == 63) {
+      return result;
+    }
+    if (result[2].i == 54) {
+      return result;
+    }
+    if (result[3].i == 64) {
+      return result;
     }
 
     expect(1, 1);
