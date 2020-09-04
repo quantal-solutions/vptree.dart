@@ -14,5 +14,5 @@ class VpTreeFactory {
     return a < b;
   }
 
-  select(List array, int k, infComparator) {}
+  select(List array, int k, Function infComparator) {}
 }
