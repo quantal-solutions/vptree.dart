@@ -39,8 +39,8 @@ void main() {
     prepareTestSet(int size) {
       List<int> v = [];
       for (var i = 0; i < size; i += 4) {
-        v.add(i / 2);
-        v.add((size - 2) - (i / 2));
+        v.add(i ~/ 2);
+        v.add((size - 2) - (i ~/ 2));
       }
       for (var i = 1; i < size; i += 2) v.add(i);
       return v;
@@ -49,12 +49,14 @@ void main() {
     doSizeTest(int size) {
       var set = prepareTestSet(size);
       var s = List.from(set);
+      var s1 = List.from(B);
       s.sort((a, b) {
         return a - b;
       });
 
       for (var j = 0; j < size; ++j) {
         var v = List.from(set);
+
         vpTreeFactory.select(v, j, infComparator);
 
         expect(v[j] == s[j], equals(true));
@@ -74,110 +76,46 @@ void main() {
   });
 
   test('GCC Standard Library nth_element test suite 03', () {
-    var A = [
-      1,
-      2,
-      3,
-      4,
-      5,
-      6,
-      7,
-      8,
-      9,
-      10,
-      11,
-      12,
-      13,
-      14,
-      15,
-      16,
-      17,
-      18,
-      19,
-      20
-    ];
-    var B = [
-      10,
-      20,
-      1,
-      11,
-      2,
-      12,
-      3,
-      13,
-      4,
-      14,
-      5,
-      15,
-      6,
-      16,
-      7,
-      17,
-      8,
-      18,
-      9,
-      19
-    ];
-    var C = [
-      20,
-      19,
-      18,
-      17,
-      16,
-      15,
-      14,
-      13,
-      12,
-      11,
-      10,
-      9,
-      8,
-      7,
-      6,
-      5,
-      4,
-      3,
-      2,
-      1
-    ];
+    var A = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20 ];
+    var B = [ 10, 20, 1, 11, 2, 12, 3, 13, 4, 14, 5, 15, 6, 16, 7, 17, 8, 18, 9, 19 ];
+    var C = [ 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1 ];
     var N = A.length;
     var logN = 3;
     var P = 7;
 
-    CompLast(x, y) {
+    compLast(x, y) {
       return x % 10 < y % 10;
     }
 
     var s1 = B;
 
-    dynamic pn = (N / 2) - 1;
+    dynamic pn = (N ~/ 2) - 1;
     vpTreeFactory.select(s1, pn, infComparator);
     for (var i = pn; i < N; i++) {
-      expect(!(s1[i] < s1[pn]), equals(true));
+      expect(s1[i] >= s1[pn], equals(true));
     }
 
-    vpTreeFactory.select(s1, pn, CompLast);
+    vpTreeFactory.select(s1, pn, compLast);
     for (var i = pn; i < N; i++) {
-      expect(!CompLast(s1[i], s1[pn]), equals(true));
+      expect(!compLast(s1[i], s1[pn]), equals(true));
     }
   });
 
   test('GCC Standard Library nth_element test suite 04', () {
-    MSDNTest() {
-      var list = [4, 10, 70, 30, 10, 69, 96, 100];
-      var pivot = vpTreeFactory.select(list, 3, infComparator);
-      expect(pivot, equals(30));
+    var list = [4, 10, 70, 30, 10, 69, 96, 100];
+    var pivot = vpTreeFactory.select(list, 3, infComparator);
+    expect(pivot, equals(30));
 
-      for (var i = 0; i < 3; i++) {
-        expect(list[i] < 30, equals(true));
-      }
-      for (var i = 4; i < 8; i++) {
-        expect(list[i] > 30, equals(true));
-      }
+    for (var i = 0; i < 3; i++) {
+      expect(list[i] < 30, equals(true));
+      expect(list[3], equals(30));
+    }
+    for (var i = 4; i < 8; i++) {
+      expect(list[i] > 30, equals(true));
     }
   });
 
-  test('GCC Standard Library nth_element test suite 05', () {
+  test('Single Element Test', () {
     var list = [5];
     var pivot = vpTreeFactory.select(list, 0, infComparator);
 
