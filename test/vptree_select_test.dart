@@ -4,7 +4,7 @@ import '../lib/vptree_factory.dart';
 void main() {
   VpTreeFactory vpTreeFactory;
 
-  infComparator(a,b){
+  infComparator(int a, int b){
     return a < b;
   }
 
