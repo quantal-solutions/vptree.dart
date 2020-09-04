@@ -48,17 +48,19 @@ void main() {
 
     doSizeTest(int size) {
       var set = prepareTestSet(size);
-      var s = set.sort((a, b) {
+      var s = List.from(set);
+      s.sort((a, b) {
         return a - b;
       });
+
       for (var j = 0; j < size; ++j) {
-        var v = set;
+        var v = List.from(set);
         vpTreeFactory.select(v, j, infComparator);
 
-        expect(v[j], equals(s[j]));
+        expect(v[j] == s[j], equals(true));
 
         for (var i = 0; i < j; i++) {
-          expect(!(v[j] < v[i]), equals(true));
+          expect((v[j] >= v[i]), equals(true));
         }
 
         for (var i = j; i < v.length; i++) {
