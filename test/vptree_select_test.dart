@@ -36,7 +36,7 @@ void main() {
   });
 
   test('GCC Standard Library nth_element test suite 02', () {
-    test_set(size) {
+    prepareTestSet(int size) {
       List v;
       for (var i = 0; i < size; i += 4) {
         v.add(i / 2);
@@ -46,8 +46,8 @@ void main() {
       return v;
     }
 
-    do_test01(size) {
-      var set = test_set(size);
+    doSizeTest(int size) {
+      var set = prepareTestSet(size);
       var s = set.sort((a, b) {
         return a - b;
       });
@@ -67,7 +67,7 @@ void main() {
       }
       var maxSize = (1 << 10);
       maxSize = 256;
-      for (var size = 4; size <= maxSize; size <<= 1) do_test01(size);
+      for (var size = 4; size <= maxSize; size <<= 1) doSizeTest(size);
     }
   });
 
