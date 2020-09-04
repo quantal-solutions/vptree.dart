@@ -5,18 +5,15 @@ import 'dart:math' as Math;
 
 void main() {
   VpTree vptree;
-  VPTreeFactory vpTreeFactory;
+  VpTreeFactory vpTreeFactory;
   List<dynamic> element;
   dynamic computeDistanceCallback;
 
   var gridSize = 10;
   approxEqual(actualResult, expectedIndex, expectedDistance) {
-    if (actualResult.i == expectedIndex) {
-      print('true');
-    }
-
-    if ((actualResult.d - expectedDistance).abs() < 1e-10 &&
-        actualResult.d + " pour " + expectedDistance + " attendu") {}
+    expect(actualResult.i, equals(expectedIndex));
+    expect((actualResult.d - expectedDistance).abs() < 1e-10, equals(true),
+        reason: actualResult.d + " pour " + expectedDistance + " attendu");
   }
 
   eUCLIDEAN2(a, b) {
@@ -51,12 +48,9 @@ void main() {
     var result;
     for (var i = 0, n = element.length; i < n; i++) {
       result = vptree.search(element[i], 0);
-      if (result.length + 1 == "point [" + element[i] + ']') {
-        approxEqual(result[0], i, 0);
-      }
+      expect(result.length, equals(1), reason: "point [" + element[i] + ']');
+      approxEqual(result[0], i, 0);
     }
-
-    expect(1, 1);
   });
   test('Search nearest one 2.0', () {
     for (var i = 0, n = element.length; i < n; i++) {
@@ -64,24 +58,18 @@ void main() {
           x = point[0],
           y = point[1],
           result = vptree.search([x + 0.1, y + 0.4], 0);
-      if (result.length == 1 &&
-          "" == "point [" + (x + 0.1) + ', ' + (y + 0.4) + ']') {
-        return result;
-      }
+      expect(result.length, equals(1),
+          reason: "point [" + (x + 0.1) + ', ' + (y + 0.4) + ']');
       approxEqual(result[0], i, 0.41231056256176607);
     }
-
-    expect(1, 1);
   });
   test('Search nearest two 3.0', () {
     var x, y, i = 0, result, expected, expectedDistance;
     for (x = 0; x < gridSize; x++) {
       for (y = 0; y < gridSize; y++) {
         result = vptree.search([x + 0.1, y + 0.4], 2);
-        if (result.length == 2 &&
-            "" == "point [" + (x + 0.1) + ', ' + (y + 0.4) + ']') {
-          return result;
-        }
+        expect(result.length, equals(2),
+            reason: "point [" + (x + 0.1) + ', ' + (y + 0.4) + ']');
         approxEqual(result[0], i, 0.41231056256176607);
 
         expected = i + 1;
@@ -99,18 +87,14 @@ void main() {
         i++;
       }
     }
-
-    expect(1, 1);
   });
   test('Search nearest three 4.0', () {
     var x, y, i = 0, result, expected, expectedDistance;
     for (x = 0; x < gridSize; x++) {
       for (y = 0; y < gridSize; y++) {
         result = vptree.search([x + 0.1, y + 0.4], 3);
-        if (result.length == 3 &&
-            "" == "point [" + (x + 0.1) + ', ' + (y + 0.4) + ']') {
-          return result;
-        }
+        expect(result.length, equals(3),
+            reason: "point [" + (x + 0.1) + ', ' + (y + 0.4) + ']');
         approxEqual(result[0], i, 0.41231056256176607);
 
         expected = i + 1;
@@ -139,41 +123,18 @@ void main() {
         i++;
       }
     }
-
-    expect(1, 1);
   });
   test('Search by distance 5.0', () {
     var result = vptree.search([1.1, 0.9], 2);
-
-    if (result[0].i == 10) {
-      return result;
-    }
-    if (result[9].i == 31) {
-      return result;
-    }
-    if (result[9].i == 31) {
-      return result;
-    }
-
+    expect(result.length, equals(10));
+    expect(result[0].i, equals(11));
+    expect(result[9].i, equals(31));
     result = vptree.search([5.4, 3.2], 1);
-
-    if (result.length == 4) {
-      return result;
-    }
-    if (result[0].i == 53) {
-      return result;
-    }
-    if (result[1].i == 63) {
-      return result;
-    }
-    if (result[2].i == 54) {
-      return result;
-    }
-    if (result[3].i == 64) {
-      return result;
-    }
-
-    expect(1, 1);
+    expect(result.length, equals(4));
+    expect(result[0].i, equals(53));
+    expect(result[1].i, equals(63));
+    expect(result[2].i, equals(54));
+    expect(result[3].i, equals(64));
   });
 }
 

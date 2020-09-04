@@ -1,46 +1,38 @@
 import 'package:test/test.dart';
 import '../lib/vptree_factory.dart';
 
+infComparator(int a, int b) {
+  return a < b;
+}
+
 void main() {
   VpTreeFactory vpTreeFactory;
-
-  infComparator(int a, int b){
-    return a < b;
-  }
-
   test('GCC Standard Library nth_element test suite 1-1', () {
     var array = [6, 5, 4, 3, 2, 1, 0];
     vpTreeFactory.select(array, 3, infComparator);
-    if (array[3] == 3) {
-      return true;
+    expect(array[3], equals(3));
+    for (var i = 0; i < 3; ++i) {
+      expect(array[i] < array[3], equals(true),
+          reason: 'Left elements must be < 3');
     }
-
-    for (var i = 0; i < 3; ++i)
-      if (array[i] < array[3] && "" == 'Left elements must be < 3') {
-        return true;
-      }
-    for (var i = 4; i < 7; ++i)
-      if (array[3] < array[i] && "" == 'Left elements must be > 3') {
-        return true;
-      }
-    expect(1, 1);
+    for (var i = 4; i < 7; ++i) {
+      expect(array[i] < array[3], equals(true),
+          reason: 'Left elements must be > 3');
+    }
   });
 
   test('GCC Standard Library nth_element test suite 1-2', () {
     var array = [0, 6, 1, 5, 2, 4, 3];
     vpTreeFactory.select(array, 3, infComparator);
-    if (array[3] == 3) {
-      return true;
+    expect(array[3], equals(3));
+    for (var i = 0; i < 3; ++i) {
+      expect(array[i] < array[3], equals(true),
+          reason: 'Left elements must be < 3');
     }
-    for (var i = 0; i < 3; ++i)
-      if (array[i] < array[3] && "" == 'Left elements must be < 3') {
-        return true;
-      }
-    for (var i = 4; i < 7; ++i)
-      if (array[3] < array[i] && "" == 'Left elements must be > 3') {
-        return true;
-      }
-    expect(1, 1);
+    for (var i = 4; i < 7; ++i) {
+      expect(array[i] > array[3], equals(true),
+          reason: 'Left elements must be > 3');
+    }
   });
 
   test('GCC Standard Library nth_element test suite 02', () {
@@ -56,32 +48,27 @@ void main() {
 
     do_test01(size) {
       var set = test_set(size);
-      var s = set.sort( function(a, b) { return a-b; });
+      var s = set.sort((a, b) {
+        return a - b;
+      });
       for (var j = 0; j < size; ++j) {
         var v = set;
         vpTreeFactory.select(v, j, infComparator);
 
-        if( v[j] == s[j] ){
-          return true;
+        expect(v[j], equals(s[j]));
+
+        for (var i = 0; i < j; ++i) {
+          expect(!(v[j] < v[i]), equals(true));
         }
 
-        for (var i = 0; i < j; ++i)
-          if (!(v[j] < v[i])) {
-            return true;
-          }
-
-        for (var i = j; i < v.length; ++i)
-          if (!(v[i] < v[j])) {
-            return true;
-          }
+        for (var i = j; i < v.length; ++i) {
+          expect(!(v[j] > v[i]), equals(true));
+        }
       }
-
       var mAX_SIZE = (1 << 10);
       mAX_SIZE = 256;
       for (var size = 4; size <= mAX_SIZE; size <<= 1) do_test01(size);
     }
-
-    expect(1, 1);
   });
 
   test('GCC Standard Library nth_element test suite 03', () {
@@ -163,53 +150,37 @@ void main() {
 
     dynamic pn = (N / 2) - 1;
     vpTreeFactory.select(s1, pn, infComparator);
-    for (var i = pn; i < N; ++i)
-      if (!(s1[i] < s1[pn])) {
-        return true;
-      }
+    for (var i = pn; i < N; ++i) {
+      expect(!(s1[i] < s1[pn]), equals(true));
+    }
 
     vpTreeFactory.select(s1, pn, CompLast);
-    for (var i = pn; i < N; ++i)
-      if (!CompLast(s1[i], s1[pn])) {
-        return true;
-      }
-
-    expect(1, 1);
+    for (var i = pn; i < N; ++i) {
+      expect(!CompLast(s1[i], s1[pn]), equals(true));
+    }
   });
 
   test('GCC Standard Library nth_element test suite 04', () {
     MSDNTest() {
       var list = [4, 10, 70, 30, 10, 69, 96, 100];
       var pivot = vpTreeFactory.select(list, 3, infComparator);
-      if (pivot == 30) {
-        return true;
-      }
-      for (var i = 0; i < 3; ++i)
-        if (list[i] < 30) {
-          return true;
-        }
-      if (list[3] == 30) {
-        return true;
-      }
-      for (var i = 4; i < 8; ++i)
-        if (30 < list[i]) {
-          return true;
-        }
-    }
+      expect(pivot, equals(30));
 
-    expect(1, 1);
+      for (var i = 0; i < 3; ++i) {
+        expect(list[i] < 30, equals(true));
+      }
+      for (var i = 4; i < 8; ++i) {
+        expect(list[i] > 30, equals(true));
+      }
+    }
   });
 
   test('GCC Standard Library nth_element test suite 05', () {
     var list = [5];
     var pivot = vpTreeFactory.select(list, 0, infComparator);
-    if (pivot == 5) {
-      return true;
-    }
-    if (list == [5]) {
-      return true;
-    }
-    
-  expect(1, 1);
+
+    expect(pivot, equals(5));
+
+    expect(list, equals([5]));
   });
 }
