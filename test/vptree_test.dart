@@ -3,13 +3,21 @@ import '../lib/vptree_factory.dart';
 import 'dart:math' as Math;
 
 void main() {
+  VPTreeFactory vpTreeFactory;
+  List<dynamic> element;
+  dynamic computeDistanceCallback;
+
+  var gridSize = 10;
+  approxEqual(actualResult, expectedIndex, expectedDistance) {
+    if (actualResult.i == expectedIndex) {
+      print('true');
+    }
+
+    if ((actualResult.d - expectedDistance).abs() < 1e-10 &&
+        actualResult.d + " pour " + expectedDistance + " attendu") {}
+  }
+
   test('eUCLIDEAN2 + buildTrees 1.0', () {
-    VPTreeFactory vpTreeFactory;
-    List<dynamic> element;
-    dynamic computeDistanceCallback;
-
-    var gridSize = 10;
-
     eUCLIDEAN2(a, b) {
       var dx = a[0] - b[0], dy = a[1] - b[1];
       return Math.sqrt(dx * dx + dy * dy);
@@ -41,16 +49,6 @@ void main() {
     expect(1, 1);
   });
   test('Search elements 2.0', () {
-    List<dynamic> element;
-    approxEqual(actualResult, expectedIndex, expectedDistance) {
-      if (actualResult.i == expectedIndex) {
-        print('true');
-      }
-
-      if ((actualResult.d - expectedDistance).abs() < 1e-10 &&
-          actualResult.d + " pour " + expectedDistance + " attendu") {}
-    }
-
     searchElements(vptree) {
       var result;
       for (var i = 0, n = element.length; i < n; i++) {
@@ -64,16 +62,6 @@ void main() {
     expect(1, 1);
   });
   test('Search nearest one 3.0', () {
-    List<dynamic> element;
-    approxEqual(actualResult, expectedIndex, expectedDistance) {
-      if (actualResult.i == expectedIndex) {
-        print('true');
-      }
-
-      if ((actualResult.d - expectedDistance).abs() < 1e-10 &&
-          actualResult.d + " pour " + expectedDistance + " attendu") {}
-    }
-
     searchNearestOne(vptree) {
       for (var i = 0, n = element.length; i < n; i++) {
         var point = element[i],
@@ -91,15 +79,6 @@ void main() {
     expect(1, 1);
   });
   test('Search nearest two 4.0', () {
-    var gridSize = 10;
-    approxEqual(actualResult, expectedIndex, expectedDistance) {
-      if (actualResult.i == expectedIndex) {
-        print('true');
-      }
-      if ((actualResult.d - expectedDistance).abs() < 1e-10 &&
-          actualResult.d + " pour " + expectedDistance + " attendu") {}
-    }
-
     searchNearestTwo(vptree) {
       var x, y, i = 0, result, expected, expectedDistance;
       for (x = 0; x < gridSize; x++) {
@@ -131,15 +110,6 @@ void main() {
     expect(1, 1);
   });
   test('Search  nearest three 5.0', () {
-    var gridSize = 10;
-    approxEqual(actualResult, expectedIndex, expectedDistance) {
-      if (actualResult.i == expectedIndex) {
-        print('true');
-      }
-      if ((actualResult.d - expectedDistance).abs() < 1e-10 &&
-          actualResult.d + " pour " + expectedDistance + " attendu") {}
-    }
-
     searchNearestThree(vptree) {
       var x, y, i = 0, result, expected, expectedDistance;
       for (x = 0; x < gridSize; x++) {
