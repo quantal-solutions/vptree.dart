@@ -198,17 +198,15 @@ void main() {
   });
 
   test('GCC Standard Library nth_element test suite 05', () {
-    singleElementTest() {
-      var list = [5];
-      var pivot = vPTreeFactory.select(list, 0, infComparator);
-      if (pivot == 5) {
-        return true;
-      }
-      if (list == [5]) {
-        return true;
-      }
+    var list = [5];
+    var pivot = vPTreeFactory.select(list, 0, infComparator);
+    if (pivot == 5) {
+      return true;
     }
-
-    expect(1, 1);
+    if (list == [5]) {
+      return true;
+    }
+    
+  expect(1, 1);
   });
 }

@@ -1,1 +1,3 @@
-class VpTree {}
+class VpTree {
+  search(List<dynamic> element) {}
+}

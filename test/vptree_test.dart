@@ -1,8 +1,10 @@
 import 'package:test/test.dart';
+import 'package:vptree/vptree.dart';
 import '../lib/vptree_factory.dart';
 import 'dart:math' as Math;
 
 void main() {
+  VpTree vptree;
   VPTreeFactory vpTreeFactory;
   List<dynamic> element;
   dynamic computeDistanceCallback;
@@ -17,63 +19,56 @@ void main() {
         actualResult.d + " pour " + expectedDistance + " attendu") {}
   }
 
-  test('eUCLIDEAN2 + buildTrees 1.0', () {
-    eUCLIDEAN2(a, b) {
-      var dx = a[0] - b[0], dy = a[1] - b[1];
-      return Math.sqrt(dx * dx + dy * dy);
-    }
+  eUCLIDEAN2(a, b) {
+    var dx = a[0] - b[0], dy = a[1] - b[1];
+    return Math.sqrt(dx * dx + dy * dy);
+  }
 
-    buildTrees() {
-      if (element.length == 0) {
-        var i = 0;
-        for (var x = 0; x < gridSize; x++) {
-          for (var y = 0; y < gridSize; y++) {
-            element[i++] = [x, y];
-          }
+  buildTrees() {
+    if (element.length == 0) {
+      var i = 0;
+      for (var x = 0; x < gridSize; x++) {
+        for (var y = 0; y < gridSize; y++) {
+          element[i++] = [x, y];
         }
       }
-
-      var vptree = vpTreeFactory.build(element, computeDistanceCallback, 0);
-      var vptreeb = vpTreeFactory.build(element, computeDistanceCallback, 5);
-
-      var stringified, stringifiedb;
-      stringified = vptree.stringify();
-      stringified = vptreeb.stringify();
-
-      var vptree2 =
-          vpTreeFactory.load(element, computeDistanceCallback, stringified);
-      var vptreeb2 =
-          vpTreeFactory.load(element, computeDistanceCallback, stringifiedb);
     }
 
-    expect(1, 1);
-  });
+    var vptree = vpTreeFactory.build(element, computeDistanceCallback, 0);
+    var vptreeb = vpTreeFactory.build(element, computeDistanceCallback, 5);
+
+    var stringified, stringifiedb;
+    stringified = vptree.stringify();
+    stringified = vptreeb.stringify();
+
+    var vptree2 =
+        vpTreeFactory.load(element, computeDistanceCallback, stringified);
+    var vptreeb2 =
+        vpTreeFactory.load(element, computeDistanceCallback, stringifiedb);
+  }
+
   test('Search elements 2.0', () {
-    searchElements(vptree) {
-      var result;
-      for (var i = 0, n = element.length; i < n; i++) {
-        result = vptree.search(element[i]);
-        if (result.length + 1 == "point [" + element[i] + ']') {
-          approxEqual(result[0], i, 0);
-        }
+    var result;
+    for (var i = 0, n = element.length; i < n; i++) {
+      result = vptree.search(element[i]);
+      if (result.length + 1 == "point [" + element[i] + ']') {
+        approxEqual(result[0], i, 0);
       }
     }
 
     expect(1, 1);
   });
   test('Search nearest one 3.0', () {
-    searchNearestOne(vptree) {
-      for (var i = 0, n = element.length; i < n; i++) {
-        var point = element[i],
-            x = point[0],
-            y = point[1],
-            result = vptree.search([x + 0.1, y + 0.4]);
-        if (result.length == 1 &&
-            "" == "point [" + (x + 0.1) + ', ' + (y + 0.4) + ']') {
-          return result;
-        }
-        approxEqual(result[0], i, 0.41231056256176607);
+    for (var i = 0, n = element.length; i < n; i++) {
+      var point = element[i],
+          x = point[0],
+          y = point[1],
+          result = vptree.search([x + 0.1, y + 0.4]);
+      if (result.length == 1 &&
+          "" == "point [" + (x + 0.1) + ', ' + (y + 0.4) + ']') {
+        return result;
       }
+      approxEqual(result[0], i, 0.41231056256176607);
     }
 
     expect(1, 1);
