@@ -47,7 +47,7 @@ void main() {
         vpTreeFactory.load(element, computeDistanceCallback, stringifiedb);
   }
 
-  test('Search elements 2.0', () {
+  test('Search elements 1.0', () {
     var result;
     for (var i = 0, n = element.length; i < n; i++) {
       result = vptree.search(element[i], 0);
@@ -58,7 +58,7 @@ void main() {
 
     expect(1, 1);
   });
-  test('Search nearest one 3.0', () {
+  test('Search nearest one 2.0', () {
     for (var i = 0, n = element.length; i < n; i++) {
       var point = element[i],
           x = point[0],
@@ -73,7 +73,7 @@ void main() {
 
     expect(1, 1);
   });
-  test('Search nearest two 4.0', () {
+  test('Search nearest two 3.0', () {
     var x, y, i = 0, result, expected, expectedDistance;
     for (x = 0; x < gridSize; x++) {
       for (y = 0; y < gridSize; y++) {
@@ -102,7 +102,7 @@ void main() {
 
     expect(1, 1);
   });
-  test('Search  nearest three 5.0', () {
+  test('Search nearest three 4.0', () {
     var x, y, i = 0, result, expected, expectedDistance;
     for (x = 0; x < gridSize; x++) {
       for (y = 0; y < gridSize; y++) {
@@ -142,7 +142,7 @@ void main() {
 
     expect(1, 1);
   });
-  test('Exercises counter should be incremented 6.0', () {
+  test('Search by distance 5.0', () {
     var result = vptree.search([1.1, 0.9], 2);
 
     if (result[0].i == 10) {
