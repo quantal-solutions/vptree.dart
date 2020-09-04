@@ -2,7 +2,7 @@ import 'package:test/test.dart';
 import '../lib/vptree_factory.dart';
 
 void main() {
-  test('GCC Standard Library nth_element test suite', () {
+ 
     VPTreeFactory vPTreeFactory;
     dynamic infComparator;
 
@@ -40,8 +40,7 @@ void main() {
         }
       expect(1, 1);
     });
-    expect(1, 1);
-  });
+    
   
   test('GCC Standard Library nth_element test suite 02', () {
     VPTreeFactory vPTreeFactory;
