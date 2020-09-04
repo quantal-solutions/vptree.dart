@@ -3,7 +3,10 @@ import '../lib/vptree_factory.dart';
 
 void main() {
   VpTreeFactory vpTreeFactory;
-  dynamic infComparator;
+
+  infComparator(a,b){
+    return a < b;
+  }
 
   test('GCC Standard Library nth_element test suite 1-1', () {
     var array = [6, 5, 4, 3, 2, 1, 0];

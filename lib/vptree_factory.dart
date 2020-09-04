@@ -10,7 +10,7 @@ class VpTreeFactory {
     return new VpTreeFactory();
   }
 
-  infComparator(a, b) {
+  infComparator(int a, int b) {
     return a < b;
   }
 
