@@ -37,7 +37,7 @@ void main() {
 
   test('GCC Standard Library nth_element test suite 02', () {
     prepareTestSet(int size) {
-      List v;
+      List<int> v = [];
       for (var i = 0; i < size; i += 4) {
         v.add(i / 2);
         v.add((size - 2) - (i / 2));
