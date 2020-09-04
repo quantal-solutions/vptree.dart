@@ -2,12 +2,12 @@ import 'package:test/test.dart';
 import '../lib/vptree_factory.dart';
 
 void main() {
-  VPTreeFactory vPTreeFactory;
+  VpTreeFactory vpTreeFactory;
   dynamic infComparator;
 
   test('GCC Standard Library nth_element test suite 1-1', () {
     var array = [6, 5, 4, 3, 2, 1, 0];
-    vPTreeFactory.select(array, 3, infComparator);
+    vpTreeFactory.select(array, 3, infComparator);
     if (array[3] == 3) {
       return true;
     }
@@ -25,7 +25,7 @@ void main() {
 
   test('GCC Standard Library nth_element test suite 1-2', () {
     var array = [0, 6, 1, 5, 2, 4, 3];
-    vPTreeFactory.select(array, 3, infComparator);
+    vpTreeFactory.select(array, 3, infComparator);
     if (array[3] == 3) {
       return true;
     }
@@ -56,7 +56,7 @@ void main() {
       var s = set.sort( function(a, b) { return a-b; });
       for (var j = 0; j < size; ++j) {
         var v = set;
-        vPTreeFactory.select(v, j, infComparator);
+        vpTreeFactory.select(v, j, infComparator);
 
         if( v[j] == s[j] ){
           return true;
@@ -159,13 +159,13 @@ void main() {
     var s1 = B;
 
     dynamic pn = (N / 2) - 1;
-    vPTreeFactory.select(s1, pn, infComparator);
+    vpTreeFactory.select(s1, pn, infComparator);
     for (var i = pn; i < N; ++i)
       if (!(s1[i] < s1[pn])) {
         return true;
       }
 
-    vPTreeFactory.select(s1, pn, CompLast);
+    vpTreeFactory.select(s1, pn, CompLast);
     for (var i = pn; i < N; ++i)
       if (!CompLast(s1[i], s1[pn])) {
         return true;
@@ -177,7 +177,7 @@ void main() {
   test('GCC Standard Library nth_element test suite 04', () {
     MSDNTest() {
       var list = [4, 10, 70, 30, 10, 69, 96, 100];
-      var pivot = vPTreeFactory.select(list, 3, infComparator);
+      var pivot = vpTreeFactory.select(list, 3, infComparator);
       if (pivot == 30) {
         return true;
       }
@@ -199,7 +199,7 @@ void main() {
 
   test('GCC Standard Library nth_element test suite 05', () {
     var list = [5];
-    var pivot = vPTreeFactory.select(list, 0, infComparator);
+    var pivot = vpTreeFactory.select(list, 0, infComparator);
     if (pivot == 5) {
       return true;
     }
