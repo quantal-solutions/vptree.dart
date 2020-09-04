@@ -1,3 +1,3 @@
 class VpTree {
-  search(List<dynamic> element) {}
+  search(List<dynamic> element, int bucketSize) {}
 }

@@ -50,7 +50,7 @@ void main() {
   test('Search elements 2.0', () {
     var result;
     for (var i = 0, n = element.length; i < n; i++) {
-      result = vptree.search(element[i]);
+      result = vptree.search(element[i], 0);
       if (result.length + 1 == "point [" + element[i] + ']') {
         approxEqual(result[0], i, 0);
       }
@@ -63,7 +63,7 @@ void main() {
       var point = element[i],
           x = point[0],
           y = point[1],
-          result = vptree.search([x + 0.1, y + 0.4]);
+          result = vptree.search([x + 0.1, y + 0.4], 0);
       if (result.length == 1 &&
           "" == "point [" + (x + 0.1) + ', ' + (y + 0.4) + ']') {
         return result;
@@ -74,73 +74,69 @@ void main() {
     expect(1, 1);
   });
   test('Search nearest two 4.0', () {
-    searchNearestTwo(vptree) {
-      var x, y, i = 0, result, expected, expectedDistance;
-      for (x = 0; x < gridSize; x++) {
-        for (y = 0; y < gridSize; y++) {
-          result = vptree.search([x + 0.1, y + 0.4], 2);
-          if (result.length == 2 &&
-              "" == "point [" + (x + 0.1) + ', ' + (y + 0.4) + ']') {
-            return result;
-          }
-          approxEqual(result[0], i, 0.41231056256176607);
-
-          expected = i + 1;
-          expectedDistance = 0.6082762530298219;
-          if (y == gridSize - 1) {
-            if (x < gridSize - 1) {
-              expected = i + gridSize;
-              expectedDistance = 0.9848857801796105;
-            } else {
-              expected = i - gridSize;
-              expectedDistance = 1.1704699910719625;
-            }
-          }
-          approxEqual(result[1], expected, expectedDistance);
-          i++;
+    var x, y, i = 0, result, expected, expectedDistance;
+    for (x = 0; x < gridSize; x++) {
+      for (y = 0; y < gridSize; y++) {
+        result = vptree.search([x + 0.1, y + 0.4], 2);
+        if (result.length == 2 &&
+            "" == "point [" + (x + 0.1) + ', ' + (y + 0.4) + ']') {
+          return result;
         }
+        approxEqual(result[0], i, 0.41231056256176607);
+
+        expected = i + 1;
+        expectedDistance = 0.6082762530298219;
+        if (y == gridSize - 1) {
+          if (x < gridSize - 1) {
+            expected = i + gridSize;
+            expectedDistance = 0.9848857801796105;
+          } else {
+            expected = i - gridSize;
+            expectedDistance = 1.1704699910719625;
+          }
+        }
+        approxEqual(result[1], expected, expectedDistance);
+        i++;
       }
     }
 
     expect(1, 1);
   });
   test('Search  nearest three 5.0', () {
-    searchNearestThree(vptree) {
-      var x, y, i = 0, result, expected, expectedDistance;
-      for (x = 0; x < gridSize; x++) {
-        for (y = 0; y < gridSize; y++) {
-          result = vptree.search([x + 0.1, y + 0.4], 3);
-          if (result.length == 3 &&
-              "" == "point [" + (x + 0.1) + ', ' + (y + 0.4) + ']') {
-            return result;
-          }
-          approxEqual(result[0], i, 0.41231056256176607);
+    var x, y, i = 0, result, expected, expectedDistance;
+    for (x = 0; x < gridSize; x++) {
+      for (y = 0; y < gridSize; y++) {
+        result = vptree.search([x + 0.1, y + 0.4], 3);
+        if (result.length == 3 &&
+            "" == "point [" + (x + 0.1) + ', ' + (y + 0.4) + ']') {
+          return result;
+        }
+        approxEqual(result[0], i, 0.41231056256176607);
 
-          expected = i + 1;
-          expectedDistance = 0.6082762530298219;
-          if (y == gridSize - 1) {
-            if (x < gridSize - 1) {
-              expected = i + gridSize;
-              expectedDistance = 0.9848857801796105;
-            } else {
-              expected = i - gridSize;
-              expectedDistance = 1.1704699910719625;
-            }
-          }
-          approxEqual(result[1], expected, expectedDistance);
-
-          expected = i + gridSize;
-          expectedDistance = 0.9848857801796105;
-          if (i == gridSize - 1 || i == gridSize * gridSize - 1) {
-            expected = i - 1;
-            expectedDistance = 1.40356688476182;
-          } else if (x == gridSize - 1 || y == gridSize - 1) {
+        expected = i + 1;
+        expectedDistance = 0.6082762530298219;
+        if (y == gridSize - 1) {
+          if (x < gridSize - 1) {
+            expected = i + gridSize;
+            expectedDistance = 0.9848857801796105;
+          } else {
             expected = i - gridSize;
             expectedDistance = 1.1704699910719625;
           }
-          approxEqual(result[2], expected, expectedDistance);
-          i++;
         }
+        approxEqual(result[1], expected, expectedDistance);
+
+        expected = i + gridSize;
+        expectedDistance = 0.9848857801796105;
+        if (i == gridSize - 1 || i == gridSize * gridSize - 1) {
+          expected = i - 1;
+          expectedDistance = 1.40356688476182;
+        } else if (x == gridSize - 1 || y == gridSize - 1) {
+          expected = i - gridSize;
+          expectedDistance = 1.1704699910719625;
+        }
+        approxEqual(result[2], expected, expectedDistance);
+        i++;
       }
     }
 
