@@ -11,13 +11,13 @@ void main() {
     var array = [6, 5, 4, 3, 2, 1, 0];
     vpTreeFactory.select(array, 3, infComparator);
     expect(array[3], equals(3));
-    for (var i = 0; i < 3; ++i) {
+    for (var i = 0; i < 3; i++) {
       expect(array[i] < array[3], equals(true),
           reason: 'Left elements must be < 3');
     }
-    for (var i = 4; i < 7; ++i) {
-      expect(array[i] < array[3], equals(true),
-          reason: 'Left elements must be > 3');
+    for (var i = 4; i < 7; i++) {
+      expect(array[i] > array[3], equals(true),
+          reason: 'Right elements must be > 3');
     }
   });
 
@@ -25,13 +25,13 @@ void main() {
     var array = [0, 6, 1, 5, 2, 4, 3];
     vpTreeFactory.select(array, 3, infComparator);
     expect(array[3], equals(3));
-    for (var i = 0; i < 3; ++i) {
+    for (var i = 0; i < 3; i++) {
       expect(array[i] < array[3], equals(true),
           reason: 'Left elements must be < 3');
     }
-    for (var i = 4; i < 7; ++i) {
+    for (var i = 4; i < 7; i++) {
       expect(array[i] > array[3], equals(true),
-          reason: 'Left elements must be > 3');
+          reason: 'Right elements must be > 3');
     }
   });
 
@@ -57,17 +57,17 @@ void main() {
 
         expect(v[j], equals(s[j]));
 
-        for (var i = 0; i < j; ++i) {
+        for (var i = 0; i < j; i++) {
           expect(!(v[j] < v[i]), equals(true));
         }
 
-        for (var i = j; i < v.length; ++i) {
+        for (var i = j; i < v.length; i++) {
           expect(!(v[j] > v[i]), equals(true));
         }
       }
-      var mAX_SIZE = (1 << 10);
-      mAX_SIZE = 256;
-      for (var size = 4; size <= mAX_SIZE; size <<= 1) do_test01(size);
+      var maxSize = (1 << 10);
+      maxSize = 256;
+      for (var size = 4; size <= maxSize; size <<= 1) do_test01(size);
     }
   });
 
@@ -150,12 +150,12 @@ void main() {
 
     dynamic pn = (N / 2) - 1;
     vpTreeFactory.select(s1, pn, infComparator);
-    for (var i = pn; i < N; ++i) {
+    for (var i = pn; i < N; i++) {
       expect(!(s1[i] < s1[pn]), equals(true));
     }
 
     vpTreeFactory.select(s1, pn, CompLast);
-    for (var i = pn; i < N; ++i) {
+    for (var i = pn; i < N; i++) {
       expect(!CompLast(s1[i], s1[pn]), equals(true));
     }
   });
@@ -166,10 +166,10 @@ void main() {
       var pivot = vpTreeFactory.select(list, 3, infComparator);
       expect(pivot, equals(30));
 
-      for (var i = 0; i < 3; ++i) {
+      for (var i = 0; i < 3; i++) {
         expect(list[i] < 30, equals(true));
       }
-      for (var i = 4; i < 8; ++i) {
+      for (var i = 4; i < 8; i++) {
         expect(list[i] > 30, equals(true));
       }
     }
