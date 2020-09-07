@@ -1,7 +1,7 @@
 import './vptree.dart';
 
 class VpTreeFactory {
-  build(List<dynamic> element, int bucketSize, computeDistanceCallback) {
+  build(List<dynamic> element, int bucketSize, Function(int,int) computeDistanceCallback) {
     var bucketSize = 0, vptree, vptreeb, vptree2, vptreeb2;
     return VpTree();
   }
