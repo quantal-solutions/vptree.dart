@@ -49,7 +49,7 @@ void main() {
     doSizeTest(int size) {
       var set = prepareTestSet(size);
       var s = List.from(set);
-      var s1 = List.from(B);
+
       s.sort((a, b) {
         return a - b;
       });
@@ -76,9 +76,72 @@ void main() {
   });
 
   test('GCC Standard Library nth_element test suite 03', () {
-    var A = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20 ];
-    var B = [ 10, 20, 1, 11, 2, 12, 3, 13, 4, 14, 5, 15, 6, 16, 7, 17, 8, 18, 9, 19 ];
-    var C = [ 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1 ];
+    var A = [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20
+    ];
+    var B = [
+      10,
+      20,
+      1,
+      11,
+      2,
+      12,
+      3,
+      13,
+      4,
+      14,
+      5,
+      15,
+      6,
+      16,
+      7,
+      17,
+      8,
+      18,
+      9,
+      19
+    ];
+    var C = [
+      20,
+      19,
+      18,
+      17,
+      16,
+      15,
+      14,
+      13,
+      12,
+      11,
+      10,
+      9,
+      8,
+      7,
+      6,
+      5,
+      4,
+      3,
+      2,
+      1
+    ];
     var N = A.length;
     var logN = 3;
     var P = 7;
@@ -87,7 +150,7 @@ void main() {
       return x % 10 < y % 10;
     }
 
-    var s1 = B;
+    var s1 = List<int>.from(B);
 
     dynamic pn = (N ~/ 2) - 1;
     vpTreeFactory.select(s1, pn, infComparator);
