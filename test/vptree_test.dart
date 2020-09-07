@@ -16,7 +16,7 @@ void main() {
         reason: actualResult.d + " pour " + expectedDistance + " attendu");
   }
 
-  eUCLIDEAN2(List<int> a, List<int> b) {
+  euclidean2(List<int> a, List<int> b) {
     var dx = a[0] - b[0], dy = a[1] - b[1];
     return Math.sqrt(dx * dx + dy * dy);
   }
@@ -45,7 +45,7 @@ void main() {
   }
 
   test('Search elements 1.0', () {
-    var vptree = new VpTreeFactory().build(element, eUCLIDEAN2, 0);//1
+    var vptree = new VpTreeFactory().build(element, 0, euclidean2);
     var result;
     for (var i = 0, n = element.length; i < n; i++) {
       result = vptree.search(element[i], 0);
@@ -54,7 +54,7 @@ void main() {
     }
   });
   test('Search nearest one 2.0', () {
-    var vptree = new VpTreeFactory().build(element, 0, eUCLIDEAN2);//2
+    var vptree = new VpTreeFactory().build(element, 0, euclidean2);
     for (var i = 0, n = element.length; i < n; i++) {
       var point = element[i],
           x = point[0],
@@ -66,7 +66,7 @@ void main() {
     }
   });
   test('Search nearest two 3.0', () {
-    var vptree = new VpTreeFactory().build(element, computeDistanceCallback, 0);//3 
+    var vptree = new VpTreeFactory().build(element, 0, euclidean2);
     var x, y, i = 0, result, expected, expectedDistance;
     for (x = 0; x < gridSize; x++) {
       for (y = 0; y < gridSize; y++) {
@@ -92,6 +92,7 @@ void main() {
     }
   });
   test('Search nearest three 4.0', () {
+    var vptree = new VpTreeFactory().build(element, 0, euclidean2);
     var x, y, i = 0, result, expected, expectedDistance;
     for (x = 0; x < gridSize; x++) {
       for (y = 0; y < gridSize; y++) {
@@ -128,6 +129,7 @@ void main() {
     }
   });
   test('Search by distance 5.0', () {
+    var vptree = new VpTreeFactory().build(element, 0, euclidean2);
     var result = vptree.search([1.1, 0.9], 2);
     expect(result.length, equals(10));
     expect(result[0].i, equals(11));
