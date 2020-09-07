@@ -44,17 +44,16 @@ void main() {
         vpTreeFactory.load(element, computeDistanceCallback, stringifiedb);
   }
 
-  test('Search elements 1.0', () {
-    var vptree = new VpTreeFactory().build(element, 0, euclidean2);
+  searchElements(VpTree vpTree){
     var result;
     for (var i = 0, n = element.length; i < n; i++) {
-      result = vptree.search(element[i], 0);
+      result = vpTree.search(element[i], 0);
       expect(result.length, equals(1), reason: "point [" + element[i] + ']');
       approxEqual(result[0], i, 0);
     }
-  });
-  test('Search nearest one 2.0', () {
-    var vptree = new VpTreeFactory().build(element, 0, euclidean2);
+  }
+
+  searchNearestOne(VpTree vpTree){
     for (var i = 0, n = element.length; i < n; i++) {
       var point = element[i],
           x = point[0],
@@ -64,17 +63,16 @@ void main() {
           reason: "point [" + (x + 0.1) + ', ' + (y + 0.4) + ']');
       approxEqual(result[0], i, 0.41231056256176607);
     }
-  });
-  test('Search nearest two 3.0', () {
-    var vptree = new VpTreeFactory().build(element, 0, euclidean2);
+  }
+
+  searchNearestTwo(VpTree vpTree){
     var x, y, i = 0, result, expected, expectedDistance;
     for (x = 0; x < gridSize; x++) {
       for (y = 0; y < gridSize; y++) {
-        result = vptree.search([x + 0.1, y + 0.4], 2);
+        result = vpTree.search([x + 0.1, y + 0.4], 2);
         expect(result.length, equals(2),
             reason: "point [" + (x + 0.1) + ', ' + (y + 0.4) + ']');
         approxEqual(result[0], i, 0.41231056256176607);
-
         expected = i + 1;
         expectedDistance = 0.6082762530298219;
         if (y == gridSize - 1) {
@@ -90,17 +88,16 @@ void main() {
         i++;
       }
     }
-  });
-  test('Search nearest three 4.0', () {
-    var vptree = new VpTreeFactory().build(element, 0, euclidean2);
+  }
+
+  searchNearestThree(vpTree){
     var x, y, i = 0, result, expected, expectedDistance;
     for (x = 0; x < gridSize; x++) {
       for (y = 0; y < gridSize; y++) {
-        result = vptree.search([x + 0.1, y + 0.4], 3);
+        result = vpTree.search([x + 0.1, y + 0.4], 3);
         expect(result.length, equals(3),
             reason: "point [" + (x + 0.1) + ', ' + (y + 0.4) + ']');
         approxEqual(result[0], i, 0.41231056256176607);
-
         expected = i + 1;
         expectedDistance = 0.6082762530298219;
         if (y == gridSize - 1) {
@@ -113,7 +110,6 @@ void main() {
           }
         }
         approxEqual(result[1], expected, expectedDistance);
-
         expected = i + gridSize;
         expectedDistance = 0.9848857801796105;
         if (i == gridSize - 1 || i == gridSize * gridSize - 1) {
@@ -127,19 +123,105 @@ void main() {
         i++;
       }
     }
-  });
-  test('Search by distance 5.0', () {
-    var vptree = new VpTreeFactory().build(element, 0, euclidean2);
-    var result = vptree.search([1.1, 0.9], 2);
+  }
+
+  searchByDistance(vpTree){
+    var result = vpTree.search([1.1, 0.9], 2);
     expect(result.length, equals(10));
     expect(result[0].i, equals(11));
     expect(result[9].i, equals(31));
-    result = vptree.search([5.4, 3.2], 1);
+    result = vpTree.search([5.4, 3.2], 1);
     expect(result.length, equals(4));
     expect(result[0].i, equals(53));
     expect(result[1].i, equals(63));
     expect(result[2].i, equals(54));
     expect(result[3].i, equals(64));
+  }
+  
+  test('Search elements - no buckets', () {
+    var vpTree = new VpTreeFactory().build(element, 0, euclidean2);
+    searchElements(vpTree);
+  });
+  test('Search elements - 5 elements buckets', () {
+    var vpTree = new VpTreeFactory().build(element, 5, euclidean2);
+    searchElements(vpTree);
+  });
+  test('Search elements - stringified and reloaded VpTree - no buckets', () {
+    var vpTree = new VpTreeFactory().load(element, 0, euclidean2);
+    searchElements(vpTree);
+  });
+  test('Search elements - stringified and reloaded VpTree - 5 elements buckets', () {
+    var vpTree = new VpTreeFactory().load(element, 5, euclidean2);
+    searchElements(vpTree);
+  });
+
+  test('Search nearest one - no buckets', () {
+    var vpTree = new VpTreeFactory().build(element, 0, euclidean2);
+    searchNearestOne(vpTree);
+  });
+  test('Search nearest one - 5 elements buckets', () {
+    var vpTree = new VpTreeFactory().build(element, 5, euclidean2);
+    searchNearestOne(vpTree);
+  });
+  test('Search nearest one - no buckets', () {
+    var vpTree = new VpTreeFactory().load(element, 0, euclidean2);
+    searchNearestOne(vpTree);
+  });
+  test('Search nearest one - 5 elements buckets', () {
+    var vpTree = new VpTreeFactory().load(element, 5, euclidean2);
+    searchNearestOne(vpTree);
+  });
+
+  test('Search nearest two - no buckets', () {
+    var vpTree = new VpTreeFactory().build(element, 0, euclidean2);
+    searchNearestTwo(vpTree);
+  });
+  test('Search nearest two - 5 elements buckets', () {
+    var vpTree = new VpTreeFactory().build(element, 5, euclidean2);
+    searchNearestTwo(vpTree);
+  });
+  test('Search nearest two - no buckets', () {
+    var vpTree = new VpTreeFactory().load(element, 0, euclidean2);
+    searchNearestTwo(vpTree);
+  });
+  test('Search nearest two - 5 elements buckets', () {
+    var vpTree = new VpTreeFactory().load(element, 5, euclidean2);
+    searchNearestTwo(vpTree);
+  });
+
+  test('Search nearest three - no buckets', () {
+    var vpTree = new VpTreeFactory().build(element, 0, euclidean2);
+    searchNearestThree(vpTree);
+  });
+  test('Search nearest three - 5 elements buckets', () {
+    var vpTree = new VpTreeFactory().build(element, 5, euclidean2);
+    searchNearestThree(vpTree);
+  });
+  test('Search nearest three - no buckets', () {
+    var vpTree = new VpTreeFactory().load(element, 0, euclidean2);
+    searchNearestThree(vpTree);
+  });
+  test('Search nearest three - 5 elements buckets', () {
+    var vpTree = new VpTreeFactory().load(element, 5, euclidean2);
+    searchNearestThree(vpTree);
+  });
+
+
+  test('Search by distance - no buckets', () {
+    var vpTree = new VpTreeFactory().build(element, 0, euclidean2);
+    searchByDistance(vpTree);
+  });
+  test('Search by distance - 5 elements buckets', () {
+    var vpTree = new VpTreeFactory().build(element, 5, euclidean2);
+    searchByDistance(vpTree);
+  });
+  test('Search by distance - no buckets', () {
+    var vpTree = new VpTreeFactory().load(element, 0, euclidean2);
+    searchByDistance(vpTree);
+  });
+  test('Search by distance - 5 elements buckets', () {
+    var vpTree = new VpTreeFactory().load(element, 5, euclidean2);
+    searchByDistance(vpTree);
   });
 }
 
