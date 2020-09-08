@@ -231,9 +231,9 @@ void main() {
   });
 
   test('Stringify',(){
-    var vpTree = new VpTreeFactory().build([[0,0], [1,1]], 10, euclidean2),
-    str = vptree.stringify(),
-    expected = vpTree.stringify(vpTree.tree).JSON;
+    var vpTree = new VpTreeFactory().build([[0,0], [1,1]], 10, euclidean2);
+    var str = vptree.stringify();
+    var expected = vpTree.toJson().toString();
     expect(str, equals(expected));
   });
 }

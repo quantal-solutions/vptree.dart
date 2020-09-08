@@ -35,4 +35,7 @@ class VpTree {
   // }
 		return "";
   }
+  toJson(){
+    
+  }
 }
