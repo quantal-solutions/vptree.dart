@@ -230,7 +230,7 @@ void main() {
     searchByDistance(vpTree);
   });
 
-  test('Stringify test',(){
+  test('Stringify',(){
     var vpTree = new VpTreeFactory().build([[0,0], [1,1]], 10, euclidean2),
     str = vptree.stringify(),
     expected = vpTree.stringify(vpTree.tree).JSON;
