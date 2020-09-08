@@ -1,7 +1,7 @@
 class VpTree {
   search(List<dynamic> element, int bucketSize) {}
   
-  stringify(){
+  stringify() {
   // var stack = [root || tree], s = '';
   // while (stack.length) {
   // 	var node = stack.pop();
