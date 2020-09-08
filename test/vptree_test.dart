@@ -229,6 +229,13 @@ void main() {
     var vpTree = new VpTreeFactory().build(element, 5, euclidean2);
     searchByDistance(vpTree);
   });
+
+  test('Stringify test',(){
+    var vpTree = new VpTreeFactory().build([[0,0], [1,1]], 10, euclidean2),
+    str = vptree.stringify(),
+    expected = vpTree.stringify(vpTree.tree).JSON;
+    expect(str, equals(expected));
+  });
 }
 
 //flutter test test\vptree_test.dart
