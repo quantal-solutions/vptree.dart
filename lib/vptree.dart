@@ -35,7 +35,7 @@ class VpTree {
   // }
 		return "";
   }
-  toJson(){
-    
-  }
+  Map<String, dynamic> toJson() => {
+
+  };
 }
