@@ -221,14 +221,6 @@ void main() {
     searchNearestThree(vpTree);
   });
 
-  test('Search by distance - no buckets', () {
-    var vpTree = new VpTreeFactory().build(element, 0, euclidean2);
-    searchByDistance(vpTree);
-  });
-  test('Search by distance - 5 elements buckets', () {
-    var vpTree = new VpTreeFactory().build(element, 5, euclidean2);
-    searchByDistance(vpTree);
-  });
   test('Search by distance - stringified and reloaded VpTree - no buckets', () {
     var origVpTree = new VpTreeFactory().build(element, 0, euclidean2);
     var vpTree = new VpTreeFactory().load(element, origVpTree.stringify(), euclidean2);
