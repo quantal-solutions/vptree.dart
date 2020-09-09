@@ -21,7 +21,8 @@ void main() {
     return Math.sqrt(dx * dx + dy * dy);
   }
 
-  buildTrees() {
+  buildElements() {
+    var elements = [];
     if (element.length == 0) {
       var i = 0;
       for (var x = 0; x < gridSize; x++) {
@@ -30,18 +31,11 @@ void main() {
         }
       }
     }
-
     var vptree = vpTreeFactory.build(element, 0, euclidean2);
     var vptreeb = vpTreeFactory.build(element, 5, euclidean2);
-
     var stringified, stringifiedb;
     stringified = vptree.stringify();
     stringified = vptreeb.stringify();
-
-    var vptree2 =
-        vpTreeFactory.load(element, computeDistanceCallback, stringified);
-    var vptreeb2 =
-        vpTreeFactory.load(element, computeDistanceCallback, stringifiedb);
   }
 
   searchElements(VpTree vpTree){
