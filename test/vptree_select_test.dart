@@ -6,10 +6,9 @@ infComparator(int a, int b) {
 }
 
 void main() {
-  VpTreeFactory vpTreeFactory;
   test('GCC Standard Library nth_element test suite 1-1', () {
     var array = [6, 5, 4, 3, 2, 1, 0];
-    vpTreeFactory.select(array, 3, infComparator);
+    VpTreeFactory().select(array, 3, infComparator);
     expect(array[3], equals(3));
     for (var i = 0; i < 3; i++) {
       expect(array[i] < array[3], equals(true),
@@ -23,7 +22,7 @@ void main() {
 
   test('GCC Standard Library nth_element test suite 1-2', () {
     var array = [0, 6, 1, 5, 2, 4, 3];
-    vpTreeFactory.select(array, 3, infComparator);
+    VpTreeFactory().select(array, 3, infComparator);
     expect(array[3], equals(3));
     for (var i = 0; i < 3; i++) {
       expect(array[i] < array[3], equals(true),
@@ -57,7 +56,7 @@ void main() {
       for (var j = 0; j < size; ++j) {
         var v = List.from(set);
 
-        vpTreeFactory.select(v, j, infComparator);
+        VpTreeFactory().select(v, j, infComparator);
 
         expect(v[j] == s[j], equals(true));
 
@@ -90,12 +89,12 @@ void main() {
     var s1 = List<int>.from(B);
 
     dynamic pn = (N ~/ 2) - 1;
-    vpTreeFactory.select(s1, pn, infComparator);
+    VpTreeFactory().select(s1, pn, infComparator);
     for (var i = pn; i < N; i++) {
       expect(s1[i] >= s1[pn], equals(true));
     }
 
-    vpTreeFactory.select(s1, pn, compLast);
+    VpTreeFactory().select(s1, pn, compLast);
     for (var i = pn; i < N; i++) {
       expect(!compLast(s1[i], s1[pn]), equals(true));
     }
@@ -103,7 +102,7 @@ void main() {
 
   test('GCC Standard Library nth_element test suite 04', () {
     var list = [4, 10, 70, 30, 10, 69, 96, 100];
-    var pivot = vpTreeFactory.select(list, 3, infComparator);
+    var pivot = VpTreeFactory().select(list, 3, infComparator);
     expect(pivot, equals(30));
 
     for (var i = 0; i < 3; i++) {
@@ -117,7 +116,7 @@ void main() {
 
   test('Single Element Test', () {
     var list = [5];
-    var pivot = vpTreeFactory.select(list, 0, infComparator);
+    var pivot = VpTreeFactory().select(list, 0, infComparator);
 
     expect(pivot, equals(5));
 
