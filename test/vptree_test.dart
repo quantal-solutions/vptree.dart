@@ -27,25 +27,24 @@ void main() {
     return elements;
   }
 
-  searchElements(VpTree vpTree){
-    var element = buildElements();
+  searchElements(VpTree vpTree, List<List<int>> elements){
     var result;
-    for (var i = 0, n = element.length; i < n; i++) {
-      result = vpTree.search(element[i], 0);
-      expect(result.length, equals(1), reason: "point [" + element[i] + ']');
+    for (var i = 0, n = elements.length; i < n; i++) {
+      result = vpTree.search(elements[i], 0);
+      expect(result.length, equals(1), reason: "point [" + elements[i].toString() + ']');
       approxEqual(result[0], i, 0);
     }
   }
 
-  searchNearestOne(VpTree vpTree){
-    var element = buildElements();
-    for (var i = 0, n = element.length; i < n; i++) {
-      var point = element[i],
+  searchNearestOne(VpTree vpTree, List<List<int>> elements){
+
+    for (var i = 0, n = elements.length; i < n; i++) {
+      var point = elements[i],
           x = point[0],
           y = point[1],
           result = vpTree.search([x + 0.1, y + 0.4], 0);
       expect(result.length, equals(1),
-          reason: "point [" + (x + 0.1) + ', ' + (y + 0.4) + ']');
+          reason: "point [" + (x + 0.1).toString() + ', ' + (y + 0.4).toString() + ']');
       approxEqual(result[0], i, 0.41231056256176607);
     }
   }
@@ -133,18 +132,18 @@ void main() {
   test('Search elements - no buckets', () {
     var element = buildElements();
     var vpTree = new VpTreeFactory().build(element, 0, euclidean2);
-    searchElements(vpTree);
+    searchElements(vpTree, elements);
   });
   test('Search elements - 5 elements buckets', () {
     var element = buildElements();
     var vpTree = new VpTreeFactory().build(element, 5, euclidean2);
-    searchElements(vpTree);
+    searchElements(vpTree, elements);
   });
   test('Search elements - stringified and reloaded VpTree - no buckets', () {
     var element = buildElements();
     var origVpTree = new VpTreeFactory().build(element, 0, euclidean2);
     var vpTree = new VpTreeFactory().load(element, origVpTree.stringify(), euclidean2);
-    searchElements(vpTree);
+    searchElements(vpTree, elements);
   });
   test('Search elements - stringified and reloaded VpTree - 5 elements buckets', () {
     var element = buildElements();
