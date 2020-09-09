@@ -23,14 +23,6 @@ void main() {
 
   buildElements() {
     var elements = [];
-    if (elements.length == 0) {
-      var i = 0;
-      for (var x = 0; x < gridSize; x++) {
-        for (var y = 0; y < gridSize; y++) {
-          elements[i++] = [x, y];
-        }
-      }
-    }
     return elements;
   }
 
