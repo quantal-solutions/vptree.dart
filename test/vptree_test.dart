@@ -4,12 +4,7 @@ import '../lib/vptree_factory.dart';
 import 'dart:math' as Math;
 
 void main() {
-  VpTree vptree;
-  VpTreeFactory vpTreeFactory;
-  List<dynamic> element;
-  dynamic computeDistanceCallback;
 
-  var gridSize = 10;
   approxEqual(actualResult, expectedIndex, expectedDistance) {
     expect(actualResult.i, equals(expectedIndex));
     expect((actualResult.d - expectedDistance).abs() < 1e-10, equals(true),
@@ -46,7 +41,7 @@ void main() {
       var point = element[i],
           x = point[0],
           y = point[1],
-          result = vptree.search([x + 0.1, y + 0.4], 0);
+          result = vpTree.search([x + 0.1, y + 0.4], 0);
       expect(result.length, equals(1),
           reason: "point [" + (x + 0.1) + ', ' + (y + 0.4) + ']');
       approxEqual(result[0], i, 0.41231056256176607);
@@ -220,7 +215,7 @@ void main() {
 
   test('Stringify',(){
     var vpTree = new VpTreeFactory().build([[0,0], [1,1]], 10, euclidean2);
-    var str = vptree.stringify();
+    var str = vpTree.stringify();
     var expected = vpTree.toJson().toString();
     expect(str, equals(expected));
   });
