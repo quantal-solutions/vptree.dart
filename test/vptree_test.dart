@@ -31,11 +31,6 @@ void main() {
         }
       }
     }
-    var vptree = vpTreeFactory.build(element, 0, euclidean2);
-    var vptreeb = vpTreeFactory.build(element, 5, euclidean2);
-    var stringified, stringifiedb;
-    stringified = vptree.stringify();
-    stringified = vptreeb.stringify();
   }
 
   searchElements(VpTree vpTree){
