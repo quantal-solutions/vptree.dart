@@ -27,7 +27,7 @@ void main() {
     return elements;
   }
 
-  searchElements(VpTree vpTree, List<List<int>> elements){
+  searchElements(VpTree vpTree, List<List<int>> elements) {
     var result;
     for (var i = 0, n = elements.length; i < n; i++) {
       result = vpTree.search(elements[i], 0);
@@ -36,8 +36,7 @@ void main() {
     }
   }
 
-  searchNearestOne(VpTree vpTree, List<List<int>> elements){
-
+  searchNearestOne(VpTree vpTree, List<List<int>> elements) {
     for (var i = 0, n = elements.length; i < n; i++) {
       var point = elements[i],
           x = point[0],
