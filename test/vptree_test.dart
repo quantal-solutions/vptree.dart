@@ -17,11 +17,10 @@ void main() {
   }
 
   buildElements() {
-    var elements = [];
-    var i = 0;
+    var elements = List<List<int>>();
     for (var x = 0; x < gridSize; x++) {
       for (var y = 0; y < gridSize; y++) {
-        elements[i++] = [x, y];
+        elements.add([x, y]);
       }
     }
     return elements;
