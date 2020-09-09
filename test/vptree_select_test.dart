@@ -69,10 +69,11 @@ void main() {
           expect(v[i] >= v[j], equals(true));
         }
       }
-      var maxSize = (1 << 10);
-      maxSize = 256;
-      for (var size = 4; size <= maxSize; size <<= 1) doSizeTest(size);
     }
+    var maxSize = (1 << 10);
+    maxSize = 256;
+    for (var size = 4; size <= maxSize; size <<= 1) doSizeTest(size);
+    
   });
 
   test('GCC Standard Library nth_element test suite 03', () {
