@@ -73,7 +73,7 @@ void main() {
     }
   }
 
-  searchNearestThree(vpTree, List<List<int>> elements){
+  searchNearestThree(VpTree vpTree, List<List<int>> elements){
     var x, y, i = 0, result, expected, expectedDistance;
     for (x = 0; x < gridSize; x++) {
       for (y = 0; y < gridSize; y++) {
@@ -108,7 +108,7 @@ void main() {
     }
   }
 
-  searchByDistance(vpTree, List<List<int>> elements){
+  searchByDistance(VpTree vpTree, List<List<int>> elements){
     var result = vpTree.search([1.1, 0.9], 2);
     expect(result.length, equals(10));
     expect(result[0].i, equals(11));
