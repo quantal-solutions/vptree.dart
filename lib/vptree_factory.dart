@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import './vptree.dart';
 
 class VpTreeFactory {
@@ -69,7 +71,7 @@ class VpTreeFactory {
 
   selectVPIndex(list) {
     var math;
-    return math.floor(math.random() * list.length);
+    return (Random().nextInt(1) * list.length).floor();
   }
 
   load(List<List<int>> element, String stringifiedTree,
