@@ -1,18 +1,15 @@
 class VpTree {
 List<List<int>> elements;
-dynamic distance;
-dynamic tree;
+Map<String, int> treeNode;
+Function(List<int>, List<int>) computeDistanceCallback;
 int comparisons;
-dynamic searchVPTree;
 
-  VpTree(List<List<int>> elements, distance, tree) {
+  VpTree(List<List<int>> elements, 
+  Map<String, int> treeNode, 
+  Function(List<int>, List<int>) computeDistanceCallback) {
 		this.elements = elements;
-		this.distance = distance;
-		this.tree = tree;
-
-		this.search();
-		this.comparisons = 0;
-		this.stringify();
+    this.treeNode = treeNode;
+		this.computeDistanceCallback = computeDistanceCallback;
 	}
 
   search(List<dynamic> element, int bucketSize) {}

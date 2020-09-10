@@ -7,9 +7,9 @@ class VpTreeFactory {
     for (var i = 0, n = elements.length; i < n; i++) {
       list[i] = {"i": i};
     }
-    var tree =
-        recurseVPTree(elements, list, bucketSize, computeDistanceCallback);
-    return new VpTree();
+    var treeNode = 
+      recurseVPTree(elements, list, bucketSize, computeDistanceCallback);
+    return new VpTree(elements, treeNode, computeDistanceCallback);
   }
 
   recurseVPTree(List<List<int>> elements, 
