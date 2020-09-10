@@ -3,7 +3,7 @@ import './vptree.dart';
 class VpTreeFactory {
   build(List<List<int>> elements, int bucketSize,
       Function(List<int>, List<int>) computeDistanceCallback) {
-    var list = [];
+    var list = List<Map<String, int>>();
     for (var i = 0, n = elements.length; i < n; i++) {
       list.add({"i": i});
     }
