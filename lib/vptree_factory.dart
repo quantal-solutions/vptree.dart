@@ -5,7 +5,7 @@ class VpTreeFactory {
       Function(List<int>, List<int>) computeDistanceCallback) {
     var list = [];
     for (var i = 0, n = elements.length; i < n; i++) {
-      list[i] = {"i": i};
+      list.add({"i": i});
     }
     var treeNode = 
       recurseVPTree(elements, list, bucketSize, computeDistanceCallback);
