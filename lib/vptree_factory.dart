@@ -70,7 +70,6 @@ class VpTreeFactory {
   }
 
   selectVPIndex(list) {
-    var math;
     return (Random().nextInt(1) * list.length).floor();
   }
 
