@@ -1,4 +1,20 @@
 class VpTree {
+List<List<int>> elements;
+dynamic distance;
+dynamic tree;
+int comparisons;
+dynamic searchVPTree;
+
+  VpTree(List<List<int>> elements, distance, tree) {
+		this.elements = elements;
+		this.distance = distance;
+		this.tree = tree;
+
+		this.search();
+		this.comparisons = 0;
+		this.stringify();
+	}
+
   search(List<dynamic> element, int bucketSize) {}
   
   stringify() {
