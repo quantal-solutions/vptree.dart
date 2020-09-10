@@ -1,5 +1,5 @@
 import 'dart:math';
-
+import './vptree_node.dart';
 import './vptree.dart';
 
 class VpTreeFactory {
@@ -33,19 +33,19 @@ class VpTreeFactory {
     var vpIndex = selectVPIndex(list), node = list[vpIndex];
     list.removeAt(vpIndex);
     listLength--;
-    node = {i: node["i"]};
+    node = {"i": node["i"]};
     if (listLength == 0) {
       return node;
     }
     var vp = elements[node["i"]];
-    var dmin = double.infinity.toInt();
+    var dmin = double.maxFinite.toInt();
     var dmax = 0;
-    var item = 0;
+    Map<String, int> item;
     var dist = 0;
     var n = listLength;
     for (i = 0; i < n; i++) {
-      Map<String, int> item;
-      var dist = computeDistanceCallback(vp, elements[item["i"]]);
+      item = list[i];
+      var dist = computeDistanceCallback(vp, elements[item[i]]);
       item["dist"] = dist;
       if (dmin > dist) dmin = dist;
       if (dmax < dist) dmax = dist;
