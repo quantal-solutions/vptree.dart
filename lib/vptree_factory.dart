@@ -5,31 +5,33 @@ import './vptree.dart';
 class VpTreeFactory {
   build(List<List<int>> elements, int bucketSize,
       Function(List<int>, List<int>) computeDistanceCallback) {
-    var list = List<Map<String, int>>();
+    var nodeList = List<VpTreeNode>();
     for (var i = 0, n = elements.length; i < n; i++) {
-      list.add({"i": i});
+      VpTreeNode vpTreeNode = VpTreeNode();
+      vpTreeNode.i = i;
+      nodeList.add(vpTreeNode);
     }
     var treeNode =
-        recurseVPTree(elements, list, bucketSize, computeDistanceCallback);
+        recurseVPTree(elements, nodeList, bucketSize, computeDistanceCallback);
     return new VpTree(elements, treeNode, computeDistanceCallback);
   }
 
-  recurseVPTree(List<List<int>> elements, List<Map<String, int>> list,
+  recurseVPTree(List<List<int>> elements, List<VpTreeNode> nodeList,
       int bucketSize, Function(List<int>, List<int>) computeDistanceCallback) {
-    if (list.length == 0) {
+    if (nodeList.length == 0) {
       return null;
     }
     var i;
-    var listLength = list.length;
+    var listLength = nodeList.length;
     if (bucketSize > 0 && listLength <= bucketSize) {
       var bucket = [];
       for (i = 0; i < listLength; i++) {
-        bucket[i] = list[i]["i"];
+        bucket[i] = nodeList[i]["i"];
       }
       return bucket;
     }
-    var vpIndex = selectVPIndex(list), node = list[i];
-    list.removeAt(vpIndex);
+    var vpIndex = selectVPIndex(nodeList), node = nodeList[i];
+    nodeList.removeAt(vpIndex);
     listLength--;
     var oldNode = node;
     node = VpTreeNode();
@@ -44,7 +46,7 @@ class VpTreeFactory {
     var dist = 0;
     var n = listLength;
     for (i = 0; i < n; i++) {
-      item = list[i];
+      item = nodeList[i];
       var dist = computeDistanceCallback(vp, elements[item[i]]);
       item["dist"] = dist;
       if (dmin > dist) dmin = dist;
@@ -54,8 +56,8 @@ class VpTreeFactory {
     node["max"] = dmax;
 
     var medianIndex = listLength >> 1,
-        median = select(list, medianIndex, distanceComparator);
-    var leftItems = List<Map<String, int>>.from(list);
+        median = select(nodeList, medianIndex, distanceComparator);
+    var leftItems = List<Map<String, int>>.from(nodeList);
     leftItems.removeRange(medianIndex, leftItems.length);
     list.removeRange(0, medianIndex);
     var rightItems = list;
