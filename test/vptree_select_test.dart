@@ -69,10 +69,10 @@ void main() {
         }
       }
     }
+
     var maxSize = (1 << 10);
     maxSize = 256;
     for (var size = 4; size <= maxSize; size <<= 1) doSizeTest(size);
-    
   });
 
   test('GCC Standard Library nth_element test suite 03', () {
@@ -86,6 +86,7 @@ void main() {
     compLast(x, y) {
       return x % 10 < y % 10;
     }
+
     var s1 = List<int>.from(B);
 
     dynamic pn = (N ~/ 2) - 1;

@@ -9,15 +9,13 @@ class VpTreeFactory {
     for (var i = 0, n = elements.length; i < n; i++) {
       list.add({"i": i});
     }
-    var treeNode = 
-      recurseVPTree(elements, list, bucketSize, computeDistanceCallback);
+    var treeNode =
+        recurseVPTree(elements, list, bucketSize, computeDistanceCallback);
     return new VpTree(elements, treeNode, computeDistanceCallback);
   }
 
-  recurseVPTree(List<List<int>> elements, 
-  List<Map<String, int>> list,
-  int bucketSize, 
-  Function(List<int>, List<int>) computeDistanceCallback) {
+  recurseVPTree(List<List<int>> elements, List<Map<String, int>> list,
+      int bucketSize, Function(List<int>, List<int>) computeDistanceCallback) {
     if (list.length == 0) {
       return null;
     }
@@ -30,10 +28,12 @@ class VpTreeFactory {
       }
       return bucket;
     }
-    var vpIndex = selectVPIndex(list), node = list[vpIndex];
+    var vpIndex = selectVPIndex(list), node = list[i];
     list.removeAt(vpIndex);
     listLength--;
-    node = {"i": node["i"]};
+    var oldNode = node;
+    node = VpTreeNode();
+    node.i = oldNode.i;
     if (listLength == 0) {
       return node;
     }
@@ -50,7 +50,7 @@ class VpTreeFactory {
       if (dmin > dist) dmin = dist;
       if (dmax < dist) dmax = dist;
     }
-    node["min"] = dmin;
+    node.min = dmin;
     node["max"] = dmax;
 
     var medianIndex = listLength >> 1,
@@ -60,8 +60,10 @@ class VpTreeFactory {
     list.removeRange(0, medianIndex);
     var rightItems = list;
     node["mu"] = median.dist;
-    node["L"] = recurseVPTree(elements, leftItems, bucketSize, computeDistanceCallback);
-    node["R"] = recurseVPTree(elements, rightItems, bucketSize, computeDistanceCallback);
+    node["L"] =
+        recurseVPTree(elements, leftItems, bucketSize, computeDistanceCallback);
+    node["R"] = recurseVPTree(
+        elements, rightItems, bucketSize, computeDistanceCallback);
     return node;
   }
 
