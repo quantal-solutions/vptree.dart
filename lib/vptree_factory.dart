@@ -24,11 +24,11 @@ class VpTreeFactory {
     if (nodeList.length == 0) {
       return null;
     }
-    var i;
+
     var listLength = nodeList.length;
     if (bucketSize > 0 && listLength <= bucketSize) {
       var bucket = List<VpTreeNode>();
-      for (i = 0; i < listLength; i++) {
+      for (var i = 0; i < listLength; i++) {
         var node = VpTreeNode();
         node.i = nodeList[i].i;
         bucket[i] = node;
