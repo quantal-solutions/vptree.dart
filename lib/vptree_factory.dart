@@ -73,8 +73,8 @@ class VpTreeFactory {
     return a["dist"] < b["dist"];
   }
 
-  selectVPIndex(list) {
-    return (Random().nextInt(1) * list.length).floor();
+  selectVPIndex(List<VpTreeNode> nodeList) {
+    (Random().nextInt(1) * nodeList.length).floor();
   }
 
   load(List<List<int>> element, String stringifiedTree,
