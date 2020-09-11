@@ -82,9 +82,9 @@ class VpTreeFactory {
     var pivotNewIndex;
     var pivotDist;
     for (;;) {
-      var pivotIndex = medianOf3(list, left, right, (left + right) >> 1, comp);
-      var pivotNewIndex = partition(list, left, right, pivotIndex, comp);
-      var pivotDist = pivotNewIndex - left + 1;
+      pivotIndex = medianOf3(list, left, right, (left + right) >> 1, comp);
+      pivotNewIndex = partition(list, left, right, pivotIndex, comp);
+      pivotDist = pivotNewIndex - left + 1;
       if (pivotDist == nth) {
         return list[pivotNewIndex];
       } else if (nth < pivotDist) {
@@ -103,7 +103,7 @@ class VpTreeFactory {
         : comp(A, C) ? a : comp(B, C) ? c : b;
   }
 
-  partition(List<int> elements, int left, int right, pivotIndex,
+  partition(List<int> elements, int left, int right, int pivotIndex,
       Function(int, int) comp) {
     var pivotValue = elements[pivotIndex];
     var swap = elements[pivotIndex];
@@ -112,7 +112,7 @@ class VpTreeFactory {
     var storeIndex = left;
     for (var i = left; i < right; i++) {
       if (comp(elements[i], pivotValue)) {
-        var swap = elements[storeIndex];
+        swap = elements[storeIndex];
         elements[storeIndex] = elements[i];
         elements[i] = swap;
         storeIndex++;
