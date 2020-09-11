@@ -1,4 +1,4 @@
-import 'package:vptree/vptree_node.dart';
+import './vptree_node.dart';
 
 class VpTree {
   List<List<int>> elements;
