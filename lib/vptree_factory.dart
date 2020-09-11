@@ -45,12 +45,12 @@ class VpTreeFactory {
       return [node];
     }
     var vp = elements[node.i];
-    var dmin = double.maxFinite.toInt();
-    var dmax = 0;
+    var dmin = double.maxFinite;
+    var dmax = .0;
     VpTreeNode item;
     var dist = 0;
     var n = listLength;
-    for (i = 0; i < n; i++) {
+    for (var i = 0; i < n; i++) {
       item = nodeList[i];
       var dist = computeDistanceCallback(vp, elements[item.i]);
       item.dist = dist;
@@ -79,7 +79,7 @@ class VpTreeFactory {
   }
 
   selectVPIndex(List<VpTreeNode> nodeList) {
-    (Random().nextInt(1) * nodeList.length).floor();
+    return (Random().nextInt(1) * nodeList.length).floor().toInt();
   }
 
   load(List<List<int>> element, String stringifiedTree,

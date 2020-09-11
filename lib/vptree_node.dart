@@ -1,7 +1,7 @@
 class VpTreeNode {
   int i;
-  int min;
-  int max;
+  double min;
+  double max;
   int mu;
   List<VpTreeNode> L;
   List<VpTreeNode> R;
