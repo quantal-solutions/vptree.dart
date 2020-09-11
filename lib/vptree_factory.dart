@@ -146,11 +146,11 @@ class VpTreeFactory {
     return a < b;
   }
 
-  select(List<List<int>> list, int k, Function(int, int) infComparator) {
+  select(List<List<int>> list, int k, Function(int, int) comp) {
     if (k < 0 || k >= list.length) {
             throw new 
             Error("VPTree.select: k must be in range [0, list.length-1] (k="+k+")");
         }
-		return nth_element(list, 0, k+1, list.length-1, infComparator);
+		return findNthElement(list, 0, k+1, list.length-1, comp);
   }
 }
