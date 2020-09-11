@@ -60,8 +60,8 @@ class VpTreeFactory {
     node.min = dmin;
     node.max = dmax;
 
-    var medianIndex = listLength >> 1,
-        median = select(nodeList, medianIndex, distanceComparator);
+    var medianIndex = listLength >> 1;
+    var median = select(nodeList, medianIndex, distanceComparator);
     var leftItems = List<VpTreeNode>.from(nodeList);
     leftItems.removeRange(medianIndex, leftItems.length);
     nodeList.removeRange(0, medianIndex);
@@ -74,7 +74,62 @@ class VpTreeFactory {
     return [node];
   }
 
-  distanceComparator(a, b) {
+  findNthElement(List<List<int>> elements, int left, int nth, int right,
+      Function(List<int>, List<int>) comp) {
+    if (nth <= 0 || nth > (right - left + 1))
+      throw new Error(
+          "VPTree.nth_element: nth must be in range [1, right-left+1] 
+          (nth="+nth+")");
+    );
+    var pivotIndex;
+    var pivotNewIndex; 
+    var pivotDist;
+    for (;;) {
+      var pivotIndex =
+          medianOf3(elements, left, right, (left + right) >> 1, comp);
+      var pivotNewIndex = 
+          partition(elements, left, right, pivotIndex, comp);
+      var pivotDist = pivotNewIndex - left + 1;
+      if (pivotDist == nth) {
+        return elements[pivotNewIndex];
+      } else if (nth < pivotDist) {
+        right = pivotNewIndex - 1;
+      } else {
+        nth -= pivotDist;
+        left = pivotNewIndex + 1;
+      }
+    }
+  }
+
+  medianOf3(list, a, b, c, comp) {
+    var A = list[a], B = list[b], C = list[c];
+    return comp(A, B)
+        ? comp(B, C) ? b : comp(A, C) ? c : a
+        : comp(A, C) ? a : comp(B, C) ? c : b;
+  }
+
+  partition(List<List<int>> elements, int left, int right, pivotIndex,
+      Function(List<int>, List<int>) comp) {
+    var pivotValue = elements[pivotIndex];
+    var swap = elements[pivotIndex];
+    elements[pivotIndex] = elements[right];
+    elements[right] = swap;
+    var storeIndex = left;
+    for (var i = left; i < right; i++) {
+      if (comp(elements[i], pivotValue)) {
+        var swap = elements[storeIndex];
+        elements[storeIndex] = elements[i];
+        elements[i] = swap;
+        storeIndex++;
+      }
+    }
+    swap = elements[right];
+    elements[right] = elements[storeIndex];
+    elements[storeIndex] = swap;
+    return storeIndex;
+  }
+
+  distanceComparator(a,  b) {
     return a["dist"] < b["dist"];
   }
 
@@ -91,5 +146,11 @@ class VpTreeFactory {
     return a < b;
   }
 
-  select(List array, int k, Function(int, int) infComparator) {}
+  select(List<List<int>> list, int k, Function(int, int) infComparator) {
+    if (k < 0 || k >= list.length) {
+            throw new 
+            Error("VPTree.select: k must be in range [0, list.length-1] (k="+k+")");
+        }
+		return nth_element(list, 0, k+1, list.length-1, infComparator);
+  }
 }
