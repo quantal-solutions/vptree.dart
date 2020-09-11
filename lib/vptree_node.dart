@@ -3,7 +3,7 @@ class VpTreeNode {
   int min;
   int max;
   int mu;
-  int L;
-  int R;
+  List<VpTreeNode> L;
+  List<VpTreeNode> R;
   double dist;
 }

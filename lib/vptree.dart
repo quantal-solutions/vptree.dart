@@ -1,13 +1,15 @@
+import 'package:vptree/vptree_node.dart';
+
 class VpTree {
   List<List<int>> elements;
-  Map<String, int> treeNode;
+  List<VpTreeNode> treeNodes;
   Function(List<int>, List<int>) computeDistanceCallback;
   int comparisons;
 
-  VpTree(List<List<int>> elements, Map<String, int> treeNode,
+  VpTree(List<List<int>> elements, List<VpTreeNode> treeNodes,
       Function(List<int>, List<int>) computeDistanceCallback) {
     this.elements = elements;
-    this.treeNode = treeNode;
+    this.treeNodes = treeNodes;
     this.computeDistanceCallback = computeDistanceCallback;
   }
 

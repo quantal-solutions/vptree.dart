@@ -11,22 +11,27 @@ class VpTreeFactory {
       vpTreeNode.i = i;
       nodeList.add(vpTreeNode);
     }
-    var treeNode =
+    var treeNodes =
         recurseVPTree(elements, nodeList, bucketSize, computeDistanceCallback);
-    return new VpTree(elements, treeNode, computeDistanceCallback);
+    return new VpTree(elements, treeNodes, computeDistanceCallback);
   }
 
-  recurseVPTree(List<List<int>> elements, List<VpTreeNode> nodeList,
-      int bucketSize, Function(List<int>, List<int>) computeDistanceCallback) {
+  List<VpTreeNode> recurseVPTree(
+      List<List<int>> elements,
+      List<VpTreeNode> nodeList,
+      int bucketSize,
+      Function(List<int>, List<int>) computeDistanceCallback) {
     if (nodeList.length == 0) {
       return null;
     }
     var i;
     var listLength = nodeList.length;
     if (bucketSize > 0 && listLength <= bucketSize) {
-      var bucket = [];
+      var bucket = List<VpTreeNode>();
       for (i = 0; i < listLength; i++) {
-        bucket[i] = nodeList[i].i;
+        var node = VpTreeNode();
+        node.i = nodeList[i].i;
+        bucket[i] = node;
       }
       return bucket;
     }
@@ -37,7 +42,7 @@ class VpTreeFactory {
     node = VpTreeNode();
     node.i = oldNode.i;
     if (listLength == 0) {
-      return node;
+      return [node];
     }
     var vp = elements[node.i];
     var dmin = double.maxFinite.toInt();
@@ -66,7 +71,7 @@ class VpTreeFactory {
         recurseVPTree(elements, leftItems, bucketSize, computeDistanceCallback);
     node.R = recurseVPTree(
         elements, rightItems, bucketSize, computeDistanceCallback);
-    return node;
+    return [node];
   }
 
   distanceComparator(a, b) {
