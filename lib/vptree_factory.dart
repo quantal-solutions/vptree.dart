@@ -42,13 +42,13 @@ class VpTreeFactory {
     var vp = elements[node.i];
     var dmin = double.maxFinite.toInt();
     var dmax = 0;
-    List<VpTreeNode> item;
+    VpTreeNode item;
     var dist = 0;
     var n = listLength;
     for (i = 0; i < n; i++) {
-      item = nodeList[i].i;
-      var dist = computeDistanceCallback(vp, elements[item[i].i]);
-      item[dist].dist = dist;
+      item = nodeList[i];
+      var dist = computeDistanceCallback(vp, elements[item.i]);
+      item.dist = dist;
       if (dmin > dist) dmin = dist;
       if (dmax < dist) dmax = dist;
     }
