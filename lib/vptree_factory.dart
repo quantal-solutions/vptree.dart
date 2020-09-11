@@ -35,7 +35,7 @@ class VpTreeFactory {
       }
       return bucket;
     }
-    var vpIndex = selectVPIndex(nodeList), node = nodeList[i];
+    var vpIndex = selectVPIndex(nodeList), node = nodeList[vpIndex];
     nodeList.removeAt(vpIndex);
     listLength--;
     var oldNode = node;
