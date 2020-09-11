@@ -116,7 +116,7 @@ void main() {
   });
 
   test('Single Element Test', () {
-    var list = [5];
+    List<int> list = [5];
     var pivot = VpTreeFactory().select(list, 0, infComparator);
 
     expect(pivot, equals(5));
