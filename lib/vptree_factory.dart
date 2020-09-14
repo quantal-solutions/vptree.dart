@@ -124,8 +124,8 @@ class VpTreeFactory {
     return storeIndex;
   }
 
-  distanceComparator(a, b) {
-    return a["dist"] < b["dist"];
+  distanceComparator(VpTreeNode a, VpTreeNode b) {
+    return a.dist < b.dist;
   }
 
   selectVPIndex(List<VpTreeNode> nodeList) {
