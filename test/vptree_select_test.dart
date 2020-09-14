@@ -1,13 +1,22 @@
 import 'package:test/test.dart';
 import '../lib/vptree_factory.dart';
+import '../lib/vptree_node.dart';
 
-infComparator(int a, int b) {
-  return a < b;
+infComparator(VpTreeNode a, VpTreeNode b) {
+  return a.i < b.i;
 }
 
 void main() {
   test('GCC Standard Library nth_element test suite 1-1', () {
-    var array = [6, 5, 4, 3, 2, 1, 0];
+    var array = [
+      VpTreeNode(6),
+      VpTreeNode(5),
+      VpTreeNode(4),
+      VpTreeNode(3),
+      VpTreeNode(2),
+      VpTreeNode(1),
+      VpTreeNode(0)
+    ];
     VpTreeFactory().select(array, 3, infComparator);
     expect(array[3], equals(3));
     for (var i = 0; i < 3; i++) {
@@ -116,7 +125,7 @@ void main() {
   });
 
   test('Single Element Test', () {
-    List<int> list = [5];
+    List<VpTreeNode> list = [5];
     var pivot = VpTreeFactory().select(list, 0, infComparator);
 
     expect(pivot, equals(5));
