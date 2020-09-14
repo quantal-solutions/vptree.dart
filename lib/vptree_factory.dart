@@ -75,18 +75,18 @@ class VpTreeFactory {
   }
 
   findNthElement(
-      List<int> list, int left, int nth, int right, Function(int, int) comp) {
+      List<VpTreeNode> nodeList, int left, int nth, int right, Function(int, int) comp) {
     if (nth <= 0 || nth > (right - left + 1))
       throw ("VPTree.nth_element: nth must be in range [1, right-left+1] (nth=$nth)");
     var pivotIndex;
     var pivotNewIndex;
     var pivotDist;
     for (;;) {
-      pivotIndex = medianOf3(list, left, right, (left + right) >> 1, comp);
-      pivotNewIndex = partition(list, left, right, pivotIndex, comp);
+      pivotIndex = medianOf3(nodeList, left, right, (left + right) >> 1, comp);
+      pivotNewIndex = partition(nodeList, left, right, pivotIndex, comp);
       pivotDist = pivotNewIndex - left + 1;
       if (pivotDist == nth) {
-        return list[pivotNewIndex];
+        return nodeList[pivotNewIndex];
       } else if (nth < pivotDist) {
         right = pivotNewIndex - 1;
       } else {
@@ -103,7 +103,7 @@ class VpTreeFactory {
         : comp(A, C) ? a : comp(B, C) ? c : b;
   }
 
-  partition(List<int> elements, int left, int right, int pivotIndex,
+  partition(List<VpTreeNode> elements, int left, int right, int pivotIndex,
       Function(int, int) comp) {
     var pivotValue = elements[pivotIndex];
     var swap = elements[pivotIndex];
@@ -141,10 +141,10 @@ class VpTreeFactory {
     return a < b;
   }
 
-  select(list, int k, Function(int, int) comp) {
-    if (k < 0 || k >= list.length) {
+  select(List<VpTreeNode> nodeList, int k, Function(int, int) comp) {
+    if (k < 0 || k >= nodeList.length) {
       throw ("VPTree.select: k must be in range [0, list.length-1] (k=$k)");
     }
-    return findNthElement(list, 0, k + 1, list.length - 1, comp);
+    return findNthElement(nodeList, 0, k + 1, nodeList.length - 1, comp);
   }
 }
