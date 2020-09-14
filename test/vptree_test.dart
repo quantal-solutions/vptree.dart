@@ -1,5 +1,5 @@
 import 'package:test/test.dart';
-import 'package:vptree/vptree.dart';
+import '../lib/vptree.dart';
 import '../lib/vptree_factory.dart';
 import 'dart:math' as Math;
 
