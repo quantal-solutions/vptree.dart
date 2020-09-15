@@ -27,7 +27,7 @@ class VpTree {
       if (node.length != null) {
         for (var i = 0, n = node.length; i < n; i++) {
           comparisons++;
-          var elementID = node[i],
+          var elementID = node[i].i,
               element = elements[elementID],
               elementDist = computeDistanceCallback(element, element);
           if (elementDist < maxDistance) {
