@@ -28,11 +28,11 @@ class PriorityQueue {
 
 		var api = {
 			// This breaks IE8 compatibility. Who cares ?
-			get length() {
+			int length() {
 				return contents.length;
 			},
 
-			insert(data, priority) {
+			insert(int data, double priority) {
 				var index = binaryIndexOf(priority);
 				if (index < 0) index = -1 - index;
 				if (index < size) {
@@ -44,7 +44,7 @@ class PriorityQueue {
 				return contents.length === size ? contents[contents.length-1].priority : undefined;
 			},
 
-			list() {
+			List<PriorityQueue.Item> list() {
 				return contents.map(function(item){ return {i: item.data, d: item.priority}; });
 			}
 		};
