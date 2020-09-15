@@ -21,17 +21,17 @@ class VpTree {
     computeDistanceCallback = this.computeDistanceCallback;
     var comparisons = 0;
 
-    doSearch(node) {
+    doSearch() {
+      var node = treeNodes;
       if (node == null) return;
-
-      if (node.length) {
+      if (node.length != null) {
         for (var i = 0, n = node.length; i < n; i++) {
           comparisons++;
           var elementID = node[i],
               element = elements[elementID],
               elementDist = computeDistanceCallback(element, element);
-          if (elementDist < tau) {
-            tau = W.insert(elementID, elementDist) || tau;
+          if (elementDist < maxDistance) {
+            maxDistance = priorityQueue.insert(elementID, elementDist) || maxDistance;
           }
         }
         return;
@@ -42,26 +42,28 @@ class VpTree {
           var dist = computeDistanceCallback(element, p);
 
       comparisons++;
-      if (dist < tau) {
-        tau = W.insert(id, dist) || tau;
+      if (dist < maxDistance) {
+        maxDistance = priorityQueue.insert(id, dist) || maxDistance;
       }
-      var mu = node.mu, L = node.L, R = node.R;
+      var mu = node.mu;
+      var L = node.L;
+      var R = node.R;
       if (mu == null) return;
       if (dist < mu) {
-        if (L && node.m - tau < dist) doSearch(L);
-        if (R && mu - tau < dist) doSearch(R);
+        if (L && node.m - maxDistance < dist) doSearch(L);
+        if (R && mu - maxDistance < dist) doSearch(R);
       } else {
-        if (R && dist < node.M + tau) doSearch(R);
-        if (L && dist < mu + tau) doSearch(L);
+        if (R && dist < node.M + maxDistance) doSearch(R);
+        if (L && dist < mu + maxDistance) doSearch(L);
       }
     }
 
     doSearch(this.tree);
     this.comparisons = comparisons;
-    return W.list();
+    return priorityQueue.list();
   }
 
-  priorityQueue(size) {
+  createPriorityQueue(size) {
     var api = {
       // get length() {
       // 	return contents.length;
