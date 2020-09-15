@@ -15,10 +15,8 @@ class VpTree {
     this.computeDistanceCallback = computeDistanceCallback;
   }
 
-  search(List<dynamic> elements, int bucketSize, double tau,
-      Function(List<int>, List<int>) computeDistanceCallback) {
-    tau = double.infinity;
-    var W = priorityQueue(1);
+  search(VpTreeNode element, int searchQty, double maxDistance ) {
+    var priorityQueue = createPriorityQueue(searchQty);
     elements = this.elements;
     computeDistanceCallback = this.computeDistanceCallback;
     var comparisons = 0;
@@ -31,7 +29,7 @@ class VpTree {
           comparisons++;
           var elementID = node[i],
               element = elements[elementID],
-              elementDist = computeDistanceCallback(elements, element);
+              elementDist = computeDistanceCallback(element, element);
           if (elementDist < tau) {
             tau = W.insert(elementID, elementDist) || tau;
           }
@@ -41,7 +39,7 @@ class VpTree {
 
       var id = node.i,
           p = elements[id],
-          dist = computeDistanceCallback(elements, p);
+          var dist = computeDistanceCallback(element, p);
 
       comparisons++;
       if (dist < tau) {
@@ -96,7 +94,7 @@ class VpTree {
     var index = binaryIndexOf(priority, size);
     if (index < 0) index = -1 - index;
     if (index < size) {
-      contents.splice(index, 0, {data: data, priority: priority});
+      contents.remove(index, 0, {data: data, priority: priority});
       if (contents.length > size) {
         contents.length--;
       }
@@ -107,7 +105,7 @@ class VpTree {
   }
 
   list() {
-    return contents.map(add(item){ return {i: item.data, d: item.priority}; });
+    return contents.add((item){ return {i: item.data, d: item.priority}; });
   }
 
   stringify() {
