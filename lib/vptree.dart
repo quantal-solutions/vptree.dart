@@ -17,8 +17,8 @@ class VpTree {
 
   search(VpTreeNode element, int searchQty, double maxDistance ) {
     var priorityQueue = createPriorityQueue(searchQty);
-    elements = this.elements;
-    computeDistanceCallback = this.computeDistanceCallback;
+    var elements = this.elements;
+    var computeDistanceCallback = this.computeDistanceCallback;
     var comparisons = 0;
 
     doSearch() {
@@ -31,7 +31,7 @@ class VpTree {
               element = elements[elementID],
               elementDist = computeDistanceCallback(element, element);
           if (elementDist < maxDistance) {
-            maxDistance = priorityQueue.insert(elementID, elementDist) || maxDistance;
+            maxDistance = priorityQueue.insert((elementID, elementDist), maxDistance);
           }
         }
         return;

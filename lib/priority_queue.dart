@@ -49,5 +49,9 @@ class PriorityQueue {
 			}
 		};
 
+    class PriorityQueue (int data, double priority){
+      
+    }
+
 		return api;
 	}
