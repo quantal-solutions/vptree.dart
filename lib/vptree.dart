@@ -6,8 +6,6 @@ class VpTree {
   List<VpTreeNode> treeNodes;
   Function(List<int>, List<int>) computeDistanceCallback;
   int comparisons;
-  List<dynamic> contents;
-  num size = 5;
 
   VpTree(List<List<int>> elements, List<VpTreeNode> treeNodes,
       Function(List<int>, List<int>) computeDistanceCallback) {
@@ -16,53 +14,56 @@ class VpTree {
     this.computeDistanceCallback = computeDistanceCallback;
   }
 
-  search(VpTreeNode element, int searchQty, double maxDistance ) {
+  search(List<int> quertElement, int searchQty, double maxDistance) {
     var modMaxDistance = maxDistance;
     var priorityQueue = PriorityQueue(searchQty);
     var elements = this.elements;
     var computeDistanceCallback = this.computeDistanceCallback;
     var comparisons = 0;
 
-    doSearch() {
-      var node = treeNodes;
-      if (node == null) return;
-      if (node.length != null) {
-        for (var i = 0, n = node.length; i < n; i++) {
+    doSearch(List<VpTreeNode> treeNodes) {
+      if (treeNodes == null) return;
+
+      if (treeNodes.length > 1) {
+        for (var i = 0, n = treeNodes.length; i < n; i++) {
           comparisons++;
-          var elementID = node[i].i,
+          var elementID = treeNodes[i].i,
               element = elements[elementID],
-              elementDist = computeDistanceCallback(element, element);
+              elementDist = computeDistanceCallback(quertElement, element);
           if (elementDist < modMaxDistance) {
-            modMaxDistance = priorityQueue.insert(elementID, elementDist) || maxDistance;
+            var insertedDistance = priorityQueue.insert(elementID, elementDist); 
+            modMaxDistance = insertedDistance != null ? insertedDistance : modMaxDistance;
           }
         }
         return;
       }
 
-      var id = node.i,
-          p = elements[id],
-          var dist = computeDistanceCallback(element, p);
+      var id = treeNodes[0].i,
+          p = elements[id];
+      var dist = computeDistanceCallback(quertElement, p);
 
       comparisons++;
-      if (dist < maxDistance) {
-        maxDistance = priorityQueue.insert(id, dist) || maxDistance;
+      if (dist < modMaxDistance) {
+        var insertedDistance = priorityQueue.insert(id, dist);
+        modMaxDistance = insertedDistance != null ? insertedDistance : modMaxDistance;
       }
-      var mu = node.mu;
-      var L = node.L;
-      var R = node.R;
-      if (mu == null) return;
+
+      var mu = treeNodes[0].mu;
+      var L = treeNodes[0].L;
+      var R = treeNodes[0].R;
+      if (!treeNodes[0].isReady) return;
       if (dist < mu) {
-        if (L && node.m - maxDistance < dist) doSearch(L);
-        if (R && mu - maxDistance < dist) doSearch(R);
+        if (L != null && treeNodes[0].min - modMaxDistance < dist) doSearch(L);
+        if (R != null && mu - modMaxDistance < dist) doSearch(R);
       } else {
-        if (R && dist < node.M + maxDistance) doSearch(R);
-        if (L && dist < mu + maxDistance) doSearch(L);
+        if (R != null && dist < treeNodes[0].max + maxDistance) doSearch(R);
+        if (L != null && dist < mu + maxDistance) doSearch(L);
       }
     }
 
-    doSearch(this.tree);
+    doSearch(this.treeNodes);
     this.comparisons = comparisons;
-      return priorityQueue.list();
+    return priorityQueue.list();
   }
 
   stringify() {
