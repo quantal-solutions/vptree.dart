@@ -67,6 +67,7 @@ class VpTreeFactory {
         recurseVPTree(elements, leftItems, bucketSize, computeDistanceCallback);
     node.R = recurseVPTree(
         elements, rightItems, bucketSize, computeDistanceCallback);
+    node.isReady = true;    
     return [node];
   }
 

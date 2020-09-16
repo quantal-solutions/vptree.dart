@@ -6,6 +6,7 @@ class VpTreeNode {
   List<VpTreeNode> L;
   List<VpTreeNode> R;
   double dist;
+  bool isReady;
 
   VpTreeNode(int i) {
     this.i = i;
