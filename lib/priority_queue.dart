@@ -2,10 +2,11 @@ import 'priority_queue_item.dart';
 
 class PriorityQueue {
   var size = 5;
-  var contents = [];
-
+  var contents = List<PriorityQueueItem>();
+  
   PriorityQueue(int size) {
     this.size = size;
+
   }
 
   int binaryIndexOf(priority) {
@@ -36,15 +37,15 @@ class PriorityQueue {
     var index = binaryIndexOf(priority);
     if (index < 0) index = -1 - index;
     if (index < size) {
-      contents.remove(index, 0, {data: data, priority: priority});
+      contents.insert(index, PriorityQueueItem(data, priority));
       if (contents.length > size) {
-        contents.length--;
+        contents.removeLast();
       }
     }
     return contents.length == size ? contents[contents.length-1].priority : null;
   }
 
   List<PriorityQueueItem> list() {
-    return contents.map(function(item){ return {i: item.data, d: item.priority}; });
+    return contents.map((item) => PriorityQueueItem(item.data, item.priority));
   }
 }
