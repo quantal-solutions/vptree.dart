@@ -43,7 +43,7 @@ class PriorityQueue {
     return contents.length == size ? contents[contents.length-1].priority : null;
   }
 
-  List<PriorityQueue.Item> list() {
+  List<PriorityQueueItem> list() {
     return contents.map(function(item){ return {i: item.data, d: item.priority}; });
   }
 }
