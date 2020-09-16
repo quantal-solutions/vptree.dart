@@ -8,19 +8,18 @@ class PriorityQueue {
     this.size = size;
   }
 
-  binaryIndexOf(priority) {
-    var minIndex = 0,
-        maxIndex = contents.length - 1,
-        currentIndex,
-        currentElement;
+  int binaryIndexOf(priority) {
+    var minIndex = 0, maxIndex = contents.length - 1;
+    int currentIndex;
+    double currentPriority;
 
     while (minIndex <= maxIndex) {
       currentIndex = (minIndex + maxIndex) >> 1;
-      currentElement = contents[currentIndex].priority;
+      currentPriority = contents[currentIndex].priority;
 
-      if (currentElement < priority) {
+      if (currentPriority < priority) {
         minIndex = currentIndex + 1;
-      } else if (currentElement > priority) {
+      } else if (currentPriority > priority) {
         maxIndex = currentIndex - 1;
       } else {
         return currentIndex;
