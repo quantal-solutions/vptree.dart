@@ -74,10 +74,10 @@ void main() {
         VpTreeFactory().select(v, j, infComparator);
         expect(v[j] == s[j], equals(true));
         for (var i = 0; i < j; i++) {
-          expect((v[j] >= v[i]), equals(true));
+          expect((v[j].i >= v[i].i), equals(true));
         }
         for (var i = j; i < v.length; i++) {
-          expect(v[i] >= v[j], equals(true));
+          expect(v[i].i >= v[j].i, equals(true));
         }
       }
     }
