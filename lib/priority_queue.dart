@@ -1,4 +1,8 @@
 class PriorityQueue {
+
+  PriorityQueue(int size){
+    size = size;
+  }
 		var size = 5;
 		var contents = [];
 
