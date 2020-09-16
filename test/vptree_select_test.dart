@@ -64,9 +64,9 @@ void main() {
 
     doSizeTest(int size) {
       var set = prepareTestSet(size);
-      var s = List.from(set);
+      var s = List<VpTreeNode>.from(set);
       s.sort((a, b) {
-        return a - b;
+        return a.i - b.i;
       });
 
       for (var j = 0; j < size; ++j) {
