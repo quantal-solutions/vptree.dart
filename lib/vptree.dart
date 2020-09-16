@@ -1,3 +1,4 @@
+import './priority_queue.dart';
 import './vptree_node.dart';
 
 class VpTree {
@@ -16,7 +17,7 @@ class VpTree {
   }
 
   search(VpTreeNode element, int searchQty, double maxDistance ) {
-    var priorityQueue = createPriorityQueue(searchQty);
+    var priorityQueue = PriorityQueue(searchQty);
     var elements = this.elements;
     var computeDistanceCallback = this.computeDistanceCallback;
     var comparisons = 0;
@@ -62,12 +63,6 @@ class VpTree {
     this.comparisons = comparisons;
     return priorityQueue.list();
   }
-
-  createPriorityQueue(size) {
-    var api = {
-      // get length() {
-      // 	return contents.length;
-    };
     return api;
   }
 

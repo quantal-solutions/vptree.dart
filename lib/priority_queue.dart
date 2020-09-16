@@ -51,10 +51,5 @@ class PriorityQueue {
 				return contents.map(function(item){ return {i: item.data, d: item.priority}; });
 			}
 		};
-
-    class PriorityQueue (int data, double priority){
-      
-    }
-
 		return api;
 	}
