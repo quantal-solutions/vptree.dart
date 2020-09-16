@@ -62,48 +62,7 @@ class VpTree {
 
     doSearch(this.tree);
     this.comparisons = comparisons;
-    return priorityQueue.list();
-  }
-    return api;
-  }
-
-  binaryIndexOf(priority, num size) {
-    var minIndex = 0;
-    var maxIndex = contents.length - 1;
-    var currentIndex;
-    var currentElement;
-
-    while (minIndex <= maxIndex) {
-      currentIndex = (minIndex + maxIndex) >> 1;
-      currentElement = contents[currentIndex].priority;
-
-      if (currentElement < priority) {
-        minIndex = currentIndex + 1;
-      } else if (currentElement > priority) {
-        maxIndex = currentIndex - 1;
-      } else {
-        return currentIndex;
-      }
-    }
-    return -1 - minIndex;
-  }
-
-  insert(data, priority) {
-    var index = binaryIndexOf(priority, size);
-    if (index < 0) index = -1 - index;
-    if (index < size) {
-      contents.remove(index, 0, {data: data, priority: priority});
-      if (contents.length > size) {
-        contents.length--;
-      }
-    }
-    return contents.length == size
-        ? contents[contents.length - 1].priority
-        : null;
-  }
-
-  list() {
-    return contents.add((item){ return {i: item.data, d: item.priority}; });
+      return priorityQueue.list();
   }
 
   stringify() {

@@ -1,3 +1,5 @@
+import 'priority_queue_item.dart';
+
 class PriorityQueue {
   var size = 5;
   var contents = [];
