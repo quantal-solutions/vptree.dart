@@ -46,6 +46,6 @@ class PriorityQueue {
   }
 
   List<PriorityQueueItem> list() {
-    return contents.map((item) => PriorityQueueItem(item.data, item.priority));
+    return List<PriorityQueueItem>.from(contents.map((item) => PriorityQueueItem(item.data, item.priority)));
   }
 }

@@ -52,13 +52,13 @@ void main() {
   });
 
   test('GCC Standard Library nth_element test suite 02', () {
-    prepareTestSet(int size) {
-      List<int> v = [];
+    List<VpTreeNode> prepareTestSet(int size) {
+      var v = List<VpTreeNode>();
       for (var i = 0; i < size; i += 4) {
-        v.add(i ~/ 2);
-        v.add((size - 2) - (i ~/ 2));
+        v.add(VpTreeNode(i ~/ 2));
+        v.add(VpTreeNode((size - 2) - (i ~/ 2)));
       }
-      for (var i = 1; i < size; i += 2) v.add(i);
+      for (var i = 1; i < size; i += 2) v.add(VpTreeNode(i));
       return v;
     }
 
@@ -70,7 +70,7 @@ void main() {
       });
 
       for (var j = 0; j < size; ++j) {
-        var v = List.from(set);
+        var v = List<VpTreeNode>.from(set);
         VpTreeFactory().select(v, j, infComparator);
         expect(v[j] == s[j], equals(true));
         for (var i = 0; i < j; i++) {
