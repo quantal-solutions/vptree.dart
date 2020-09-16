@@ -1,5 +1,4 @@
 class PriorityQueue {
-
   PriorityQueue(int size){
     size = size;
   }
