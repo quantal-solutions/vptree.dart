@@ -12,25 +12,31 @@ class VpTreeNode {
     this.i = i;
   }
   factory VpTreeNode.fromJson(Map<String, dynamic> json) {
-    List<dynamic> elementsColumnOne = json['L'];
-    List<dynamic> elementsColumnTwo = json['R'];
-    elementsColumnOne.forEach((elementContents) {
-      var coords = List<int>();
-      if (elementContents is List) {
-        elementContents.forEach((elementContents) {
-          if (elementContents is int) {
-            coords.add(elementContents);
-          }
-        });
-      }
-      List<dynamic> elementsColumnOne = json['treeNodesCol'];
-      var treeNodes = List<VpTreeNode>();
-      elementsColumnOne.forEach((elementsColumnOne) {
-        var treeNode = VpTreeNode.fromJson(elementsColumnOne);
-        treeNodes.add(treeNode);
-      });
-      return VpTreeNode(i);
+    var i = json['i'];
+    var vpTreeNode = VpTreeNode(i);
+    vpTreeNode.min = json['min'];
+    vpTreeNode.max = json['max'];
+    vpTreeNode.mu = json['mu'];
+
+    List<dynamic> treeNodesLRaw = json['L'];
+    var treeNodesL = List<VpTreeNode>();
+    treeNodesLRaw.forEach((treeNodeRaw) {
+      var treeNode = VpTreeNode.fromJson(treeNodeRaw);
+      treeNodesL.add(treeNode);
     });
-    Map<String, dynamic> toJson() => {};
+    vpTreeNode.L = treeNodesL;
+
+    List<dynamic> treeNodesRRaw = json['R'];
+    var treeNodesR = List<VpTreeNode>();
+    treeNodesRRaw.forEach((treeNodeRaw) {
+      var treeNode = VpTreeNode.fromJson(treeNodeRaw);
+      treeNodesR.add(treeNode);
+    });
+    vpTreeNode.R = treeNodesR;
+
+    vpTreeNode.dist = json['dist'];
+    vpTreeNode.isReady = json['isReady'];
+
+    return vpTreeNode;
   }
 }
