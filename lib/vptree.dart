@@ -8,7 +8,6 @@ class VpTree {
   Function(List<int>, List<int>) computeDistanceCallback;
   int comparisons;
 
-
   VpTree(List<List<int>> elements, List<VpTreeNode> treeNodes,
       Function(List<int>, List<int>) computeDistanceCallback) {
     this.elements = elements;
@@ -16,7 +15,8 @@ class VpTree {
     this.computeDistanceCallback = computeDistanceCallback;
   }
 
-  List<PriorityQueueItem> search(List<int> quertElement, int searchQty, double maxDistance) {
+  List<PriorityQueueItem> search(
+      List<int> quertElement, int searchQty, double maxDistance) {
     var modMaxDistance = maxDistance;
     var priorityQueue = PriorityQueue(searchQty);
     var elements = this.elements;
@@ -33,21 +33,22 @@ class VpTree {
               element = elements[elementID],
               elementDist = computeDistanceCallback(quertElement, element);
           if (elementDist < modMaxDistance) {
-            var insertedDistance = priorityQueue.insert(elementID, elementDist); 
-            modMaxDistance = insertedDistance != null ? insertedDistance : modMaxDistance;
+            var insertedDistance = priorityQueue.insert(elementID, elementDist);
+            modMaxDistance =
+                insertedDistance != null ? insertedDistance : modMaxDistance;
           }
         }
         return;
       }
 
-      var id = treeNodes[0].i,
-          p = elements[id];
+      var id = treeNodes[0].i, p = elements[id];
       var dist = computeDistanceCallback(quertElement, p);
 
       comparisons++;
       if (dist < modMaxDistance) {
         var insertedDistance = priorityQueue.insert(id, dist);
-        modMaxDistance = insertedDistance != null ? insertedDistance : modMaxDistance;
+        modMaxDistance =
+            insertedDistance != null ? insertedDistance : modMaxDistance;
       }
 
       var mu = treeNodes[0].mu;
@@ -104,30 +105,28 @@ class VpTree {
   }
 
   factory VpTree.fromJson(Map<String, dynamic> json,
-    Function(List<int>, List<int>) computeDistanceCallback) {
-  List<dynamic> elementsRaw = json['elements'];
-  var elements = List<List<int>>();
-  elementsRaw.forEach((elementContents){
-    var coords = List<int>();
-    if (elementContents is List) {
-      elementContents.forEach((elementContents) { 
-        if(elementContents is int) {
-          coords.add(elementContents);
-        }
-      });
-    }
-    elementContents.add(coords);
-  });
+      Function(List<int>, List<int>) computeDistanceCallback) {
+    List<dynamic> elementsRaw = json['elements'];
+    var elements = List<List<int>>();
+    elementsRaw.forEach((elementContents) {
+      var coords = List<int>();
+      if (elementContents is List) {
+        elementContents.forEach((elementContents) {
+          if (elementContents is int) {
+            coords.add(elementContents);
+          }
+        });
+      }
+      elementContents.add(coords);
+    });
     List<dynamic> treeNodesRaw = json['treeNodes'];
     var treeNodes = List<VpTreeNode>();
-    treeNodesRaw.forEach((treeNodeRaw) { 
+    treeNodesRaw.forEach((treeNodeRaw) {
       var treeNode = VpTreeNode.fromJson(treeNodeRaw);
       treeNodes.add(treeNode);
     });
     return VpTree(elements, treeNodes, computeDistanceCallback);
   }
 
-  Map<String, dynamic> toJson() => {
-
-  };
+  Map<String, dynamic> toJson() => {};
 }
