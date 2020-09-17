@@ -1,5 +1,6 @@
 import './priority_queue.dart';
 import './vptree_node.dart';
+import './priority_queue_item.dart';
 
 class VpTree {
   List<List<int>> elements;
@@ -14,7 +15,7 @@ class VpTree {
     this.computeDistanceCallback = computeDistanceCallback;
   }
 
-  search(List<int> quertElement, int searchQty, double maxDistance) {
+  List<PriorityQueueItem> search(List<int> quertElement, int searchQty, double maxDistance) {
     var modMaxDistance = maxDistance;
     var priorityQueue = PriorityQueue(searchQty);
     var elements = this.elements;

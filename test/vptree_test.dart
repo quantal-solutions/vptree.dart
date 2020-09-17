@@ -2,13 +2,14 @@ import 'package:test/test.dart';
 import '../lib/vptree.dart';
 import '../lib/vptree_factory.dart';
 import 'dart:math' as Math;
+import '../lib/priority_queue_item.dart';
 
 void main() {
   const gridSize = 10;
-  approxEqual(actualResult, expectedIndex, expectedDistance) {
-    expect(actualResult.i, equals(expectedIndex));
-    expect((actualResult.d - expectedDistance).abs() < 1e-10, equals(true),
-        reason: actualResult.d + " pour " + expectedDistance + " attendu");
+  approxEqual(PriorityQueueItem actualResult, int expectedIndex, double expectedDistance) {
+    expect(actualResult.data, equals(expectedIndex));
+    expect((actualResult.priority - expectedDistance).abs() < 1e-10, equals(true),
+        reason: "${actualResult.priority} +  pour + $expectedDistance + attendu");
   }
 
   euclidean2(List<int> a, List<int> b) {
@@ -27,7 +28,7 @@ void main() {
   }
 
   searchElements(VpTree vpTree, List<List<int>> elements) {
-    var result;
+    List<PriorityQueueItem> result;
     for (var i = 0, n = elements.length; i < n; i++) {
       result = vpTree.search(elements[i], 1, double.maxFinite);
       expect(result.length, equals(1),
@@ -115,14 +116,14 @@ void main() {
   searchByDistance(VpTree vpTree, List<List<int>> elements) {
     var result = vpTree.search(List<int>.from([1.1, 0.9]), 2, double.maxFinite);
     expect(result.length, equals(10));
-    expect(result[0].i, equals(11));
-    expect(result[9].i, equals(31));
+    expect(result[0], equals(11));
+    expect(result[9], equals(31));
     result = vpTree.search(List<int>.from([5.4, 3.2]), 1, double.maxFinite);
     expect(result.length, equals(4));
-    expect(result[0].i, equals(53));
-    expect(result[1].i, equals(63));
-    expect(result[2].i, equals(54));
-    expect(result[3].i, equals(64));
+    expect(result[0], equals(53));
+    expect(result[1], equals(63));
+    expect(result[2], equals(54));
+    expect(result[3], equals(64));
   }
 
   // stringifyTest() {
