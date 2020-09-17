@@ -27,7 +27,7 @@ class VpTreeFactory {
     if (bucketSize > 0 && listLength <= bucketSize) {
       var bucket = List<VpTreeNode>();
       for (var i = 0; i < listLength; i++) {
-        bucket[i] = VpTreeNode(nodeList[i].i);
+        bucket.insert(i, VpTreeNode(nodeList[i].i));
       }
       return bucket;
     }
@@ -129,9 +129,9 @@ class VpTreeFactory {
     return (Random().nextInt(1) * nodeList.length).floor().toInt();
   }
 
-  load(List<List<int>> element, String stringifiedTree,
+  VpTree load(List<List<int>> elements, String stringifiedTree,
       Function(List<int>, List<int>) computeDistanceCallback) {
-    return new VpTreeFactory();
+    return new VpTree(elements, json.decode(stringifiedTree), computeDistanceCallback);
   }
 
   infComparator(int a, int b) {

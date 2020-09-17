@@ -8,6 +8,7 @@ class VpTree {
   Function(List<int>, List<int>) computeDistanceCallback;
   int comparisons;
 
+
   VpTree(List<List<int>> elements, List<VpTreeNode> treeNodes,
       Function(List<int>, List<int>) computeDistanceCallback) {
     this.elements = elements;
@@ -102,5 +103,16 @@ class VpTree {
     return "";
   }
 
-  Map<String, dynamic> toJson() => {};
+  factory VpTree.fromJson(Map<String, dynamic> json) {
+    return VpTree(
+      "elements": this.elements,
+      "treeNodes": this.treeNodes,
+      "computeDistanceCallback": this.computeDistanceCallback,
+      "comparisons": this.comparisons,
+    );
+  }
+
+  Map<String, dynamic> toJson() => {
+
+  };
 }
