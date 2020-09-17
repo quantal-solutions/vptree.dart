@@ -103,13 +103,28 @@ class VpTree {
     return "";
   }
 
-  factory VpTree.fromJson(Map<String, dynamic> json) {
-    return VpTree(
-      "elements": this.elements,
-      "treeNodes": this.treeNodes,
-      "computeDistanceCallback": this.computeDistanceCallback,
-      "comparisons": this.comparisons,
-    );
+  factory VpTree.fromJson(Map<String, dynamic> json,
+    Function(List<int>, List<int>) computeDistanceCallback) {
+  List<dynamic> elementsRaw = json['elements'];
+  var elements = List<List<int>>();
+  elementsRaw.forEach((elementContents){
+    var coords = List<int>();
+    if (elementContents is List) {
+      elementContents.forEach((elementContents) { 
+        if(elementContents is int) {
+          coords.add(elementContents);
+        }
+      });
+    }
+    elementContents.add(coords);
+  });
+    List<dynamic> treeNodesRaw = json['treeNodes'];
+    var treeNodes = List<VpTreeNode>();
+    treeNodesRaw.forEach((treeNodeRaw) { 
+      var treeNode = VpTreeNode.fromJson(treeNodeRaw);
+      treeNodes.add(treeNode);
+    });
+    return VpTree(elements, treeNodes, computeDistanceCallback);
   }
 
   Map<String, dynamic> toJson() => {
