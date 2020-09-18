@@ -4,7 +4,7 @@ import './vptree_node.dart';
 import './vptree.dart';
 
 class VpTreeFactory {
-  build(List<List<int>> elements, int bucketSize,
+  VpTree build(List<List<int>> elements, int bucketSize,
       Function(List<int>, List<int>) computeDistanceCallback) {
     var nodeList = List<VpTreeNode>();
     for (var i = 0, n = elements.length; i < n; i++) {
