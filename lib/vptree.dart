@@ -2,6 +2,7 @@ import 'dart:convert';
 import './priority_queue.dart';
 import './vptree_node.dart';
 import './priority_queue_item.dart';
+import './space_point.dart';
 
 class VpTree {
   List<List<int>> elements;
@@ -75,9 +76,9 @@ class VpTree {
   }
 
   factory VpTree.fromJson(Map<String, dynamic> json,
-      Function(List<int>, List<int>) computeDistanceCallback) {
+      Function(SpacePoint, SpacePoint) computeDistanceCallback) {
     List<dynamic> elementsRaw = json['elements'];
-    var elements = List<List<int>>();
+    var spacePoints = List<SpacePoint>();
     elementsRaw.forEach((elementContents) {
       var coords = List<int>();
       if (elementContents is List) {
@@ -95,7 +96,7 @@ class VpTree {
       var treeNode = VpTreeNode.fromJson(treeNodeRaw);
       treeNodes.add(treeNode);
     });
-    return VpTree(elements, treeNodes, computeDistanceCallback);
+    return VpTree(spacePoints, treeNodes, computeDistanceCallback);
   }
 
   Map<String, dynamic> toJson() => {
