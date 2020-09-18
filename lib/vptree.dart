@@ -103,9 +103,11 @@ class VpTree {
     // 	s += '}';
     // }
 
-    String stringify() {
-      return json.encode(toJson());
-    }
+    
+  }
+
+  String toJson() {
+    return json.encode(toJson());
   }
 
   factory VpTree.fromJson(Map<String, dynamic> json,
