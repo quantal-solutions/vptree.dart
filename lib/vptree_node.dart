@@ -39,4 +39,14 @@ class VpTreeNode {
 
     return vpTreeNode;
   }
+
+  Map<String, dynamic> toJson() => { 
+    'min': this.min, 
+    'max': this.max, 
+    'mu': this.mu, 
+    'L': this.L, 
+    'R': this.R, 
+    'dist': this.dist, 
+    'isReady': this.isReady 
+  };
 }

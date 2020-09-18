@@ -98,7 +98,7 @@ class VpTree {
     return VpTree(elements, treeNodes, computeDistanceCallback);
   }
 
-  Map<String, dynamic> toJson() => { 
+  Map<String, dynamic> toJson() => {
     'elements': this.elements, 
     'treeNodes': this.treeNodes.map((treeNodes) => treeNodes.toJson())
   };
