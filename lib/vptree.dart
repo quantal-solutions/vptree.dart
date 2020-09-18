@@ -5,14 +5,14 @@ import './priority_queue_item.dart';
 import './space_point.dart';
 
 class VpTree {
-  List<List<int>> elements;
+  List<SpacePoint> spacePoints;
   List<VpTreeNode> treeNodes;
   Function(List<int>, List<int>) computeDistanceCallback;
   int comparisons;
 
-  VpTree(List<List<int>> elements, List<VpTreeNode> treeNodes,
+  VpTree(List<SpacePoint> spacePoints, List<VpTreeNode> treeNodes,
       Function(List<int>, List<int>) computeDistanceCallback) {
-    this.elements = elements;
+    this.spacePoints = spacePoints;
     this.treeNodes = treeNodes;
     this.computeDistanceCallback = computeDistanceCallback;
   }
@@ -21,7 +21,7 @@ class VpTree {
       List<int> quertElement, int searchQty, double maxDistance) {
     var modMaxDistance = maxDistance;
     var priorityQueue = PriorityQueue(searchQty);
-    var elements = this.elements;
+    var spacePoints = this.spacePoints;
     var computeDistanceCallback = this.computeDistanceCallback;
     var comparisons = 0;
 
@@ -32,7 +32,7 @@ class VpTree {
         for (var i = 0, n = treeNodes.length; i < n; i++) {
           comparisons++;
           var elementID = treeNodes[i].i,
-              element = elements[elementID],
+              element = spacePoints[elementID],
               elementDist = computeDistanceCallback(quertElement, element);
           if (elementDist < modMaxDistance) {
             var insertedDistance = priorityQueue.insert(elementID, elementDist);
@@ -43,7 +43,7 @@ class VpTree {
         return;
       }
 
-      var id = treeNodes[0].i, p = elements[id];
+      var id = treeNodes[0].i, p = spacePoints[id];
       var dist = computeDistanceCallback(quertElement, p);
 
       comparisons++;
@@ -77,7 +77,7 @@ class VpTree {
 
   factory VpTree.fromJson(Map<String, dynamic> json,
       Function(SpacePoint, SpacePoint) computeDistanceCallback) {
-    List<dynamic> elementsRaw = json['elements'];
+    List<dynamic> elementsRaw = json['spacePoints'];
     var spacePoints = List<SpacePoint>();
     elementsRaw.forEach((elementContents) {
       var coords = List<int>();
@@ -100,7 +100,7 @@ class VpTree {
   }
 
   Map<String, dynamic> toJson() => {
-    'elements': this.elements, 
+    'spacePoints': this.spacePoints, 
     'treeNodes': this.treeNodes.map((treeNodes) => treeNodes.toJson())
   };
 }
