@@ -1,19 +1,19 @@
 class SpacePoint {
   List<int> coords;
-  
+
   SpacePoint(List<int> coords) {
     var coords = this.coords;
   }
 
   factory SpacePoint.fromJson(Map<String, dynamic> json) {
-    List<dynamic> coords = json['points'];
-    var vpTreeNode = SpacePoint(coords);
-    var point = List<SpacePoint>();
-    coords.forEach((coordsAll) {
-      var coord = SpacePoint.fromJson(coordsAll);
-      point.add(coord);
+    List<dynamic> coordsRaw = json['coords'];
+    var coords = List<int>();
+    coordsRaw.forEach((coordRaw) {
+      if (coordRaw is int) {
+        coords.add(coordRaw);
+      }
     });
-    return vpTreeNode;
+    return SpacePoint(coords);
   }
   
   Map<String, dynamic> tpJson() => {
