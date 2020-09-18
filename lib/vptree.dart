@@ -1,3 +1,4 @@
+import 'dart:convert';
 import './priority_queue.dart';
 import './vptree_node.dart';
 import './priority_queue_item.dart';
@@ -102,11 +103,9 @@ class VpTree {
     // 	s += '}';
     // }
 
-    String jsonEncode(Object? object,
-        {Object? toEncodable(Object? nonEncodable)?}) =>
-    json.encode(Function(List<int>, List<int>) computeDistanceCallback);
-    
-    return new VpTree(elements, json.encode(computeDistanceCallback);
+    String stringify() {
+      return json.encode(toJson());
+    }
   }
 
   factory VpTree.fromJson(Map<String, dynamic> json,
@@ -133,5 +132,6 @@ class VpTree {
     return VpTree(elements, treeNodes, computeDistanceCallback);
   }
 
-  Map<String, dynamic> toJson() => {};
+  Map<String, dynamic> toJson() =>
+      {'elements': this.elements, 'treeNodes': this.treeNodes};
 }
