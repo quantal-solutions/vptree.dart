@@ -7,18 +7,18 @@ import './space_point.dart';
 class VpTree {
   List<SpacePoint> spacePoints;
   List<VpTreeNode> treeNodes;
-  Function(List<int>, List<int>) computeDistanceCallback;
+  Function(SpacePoint, SpacePoint) computeDistanceCallback;
   int comparisons;
 
   VpTree(List<SpacePoint> spacePoints, List<VpTreeNode> treeNodes,
-      Function(List<int>, List<int>) computeDistanceCallback) {
+      Function(SpacePoint, SpacePoint) computeDistanceCallback) {
     this.spacePoints = spacePoints;
     this.treeNodes = treeNodes;
     this.computeDistanceCallback = computeDistanceCallback;
   }
 
   List<PriorityQueueItem> search(
-      List<int> quertElement, int searchQty, double maxDistance) {
+      SpacePoint querySpacePoint, int searchQty, double maxDistance) {
     var modMaxDistance = maxDistance;
     var priorityQueue = PriorityQueue(searchQty);
     var spacePoints = this.spacePoints;
@@ -33,7 +33,7 @@ class VpTree {
           comparisons++;
           var elementID = treeNodes[i].i,
               element = spacePoints[elementID],
-              elementDist = computeDistanceCallback(quertElement, element);
+              elementDist = computeDistanceCallback(querySpacePoint, element);
           if (elementDist < modMaxDistance) {
             var insertedDistance = priorityQueue.insert(elementID, elementDist);
             modMaxDistance =
@@ -44,7 +44,7 @@ class VpTree {
       }
 
       var id = treeNodes[0].i, p = spacePoints[id];
-      var dist = computeDistanceCallback(quertElement, p);
+      var dist = computeDistanceCallback(querySpacePoint, p);
 
       comparisons++;
       if (dist < modMaxDistance) {
