@@ -44,8 +44,8 @@ class VpTreeNode {
     'min': this.min, 
     'max': this.max, 
     'mu': this.mu, 
-    'L': this.L, 
-    'R': this.R, 
+    'L': this.L.map((treeNodesL) => treeNodesL.toJson()), 
+    'R': this.R.map((treeNodesR) => treeNodesR.toJson()), 
     'dist': this.dist, 
     'isReady': this.isReady 
   };
