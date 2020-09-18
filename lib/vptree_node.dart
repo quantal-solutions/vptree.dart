@@ -41,6 +41,7 @@ class VpTreeNode {
   }
 
   Map<String, dynamic> toJson() => { 
+    'i': this.i,
     'min': this.min, 
     'max': this.max, 
     'mu': this.mu, 
