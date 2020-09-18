@@ -101,7 +101,12 @@ class VpTree {
     // 	}
     // 	s += '}';
     // }
-    return "";
+
+    String jsonEncode(Object? object,
+        {Object? toEncodable(Object? nonEncodable)?}) =>
+    json.encode(Function(List<int>, List<int>) computeDistanceCallback);
+    
+    return new VpTree(elements, json.encode(computeDistanceCallback);
   }
 
   factory VpTree.fromJson(Map<String, dynamic> json,
