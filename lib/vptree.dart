@@ -70,43 +70,7 @@ class VpTree {
     return priorityQueue.list();
   }
 
-  stringify() {
-    // var stack = [root || tree], s = '';
-    // while (stack.length) {
-    // 	var node = stack.pop();
-
-    // 	if (node.length) return '['+node.join(',')+']';
-
-    // 	s += '{i:' + node.i;
-    // 	if (node.hasOwnProperty('m')) {
-    // 		s += ',m:' + node.m + ',M:' + node.M + ',mu:' + node.mu;
-    // 	}
-    // 	if (node.hasOwnProperty('b')) {
-    // 		s += ',b:[' + node.b + ']';
-    // 	}
-    // 	if (node.hasOwnProperty('L')) {
-    // 		var L = node.L;
-    // 		if (L) {
-    // 			s += ',L:';
-    // 			if (L.length) s += '[' + L + ']';
-    // 			else s += stringify(L);
-    // 		}
-    // 	}
-    // 	if (node.hasOwnProperty('R')) {
-    // 		var R = node.R;
-    // 		if (R) {
-    // 			s += ',R:';
-    // 			if (R.length) s += '[' + R + ']';
-    // 			else s += stringify(R);
-    // 		}
-    // 	}
-    // 	s += '}';
-    // }
-
-    
-  }
-
-  String toJson() {
+  String stringify() {
     return json.encode(toJson());
   }
 
@@ -136,6 +100,6 @@ class VpTree {
 
   Map<String, dynamic> toJson() => { 
     'elements': this.elements, 
-    'treeNodes': this.treeNodes
+    'treeNodes': this.treeNodes.map((treeNodes) => treeNodes.toJson())
   };
 }
