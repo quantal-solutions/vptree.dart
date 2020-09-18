@@ -1,5 +1,6 @@
 class SpacePoint {
   List<int> coords;
+  
   SpacePoint(List<int> coords) {
     var coords = this.coords;
   }
