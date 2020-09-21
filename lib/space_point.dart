@@ -16,7 +16,7 @@ class SpacePoint {
     return SpacePoint(coords);
   }
   
-  Map<String, dynamic> tpJson() => {
+  Map<String, dynamic> toJson() => {
     'coords': this.coords
   };
 }
