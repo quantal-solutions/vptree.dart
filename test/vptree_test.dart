@@ -43,7 +43,7 @@ void main() {
       var point = elements[i],
           x = point[0],
           y = point[1],
-          result = vpTree.search(List<int>.from([x + 0.1, y + 0.4]), 0, double.maxFinite);
+          result = vpTree.search(SpacePoint([x + 0.1, y + 0.4]), 0, double.maxFinite);
       expect(result.length, equals(1),
           reason: "point [" +
               (x + 0.1).toString() +
@@ -58,7 +58,7 @@ void main() {
     var x, y, i = 0, result, expected, expectedDistance;
     for (x = 0; x < gridSize; x++) {
       for (y = 0; y < gridSize; y++) {
-        result = vpTree.search(List<int>.from([x + 0.1, y + 0.4]), 2, double.maxFinite);
+        result = vpTree.search(SpacePoint([x + 0.1, y + 0.4]), 2, double.maxFinite);
         expect(result.length, equals(2),
             reason: "point [" + (x + 0.1) + ', ' + (y + 0.4) + ']');
         approxEqual(result[0], i, 0.41231056256176607);
@@ -83,7 +83,7 @@ void main() {
     var x, y, i = 0, result, expected, expectedDistance;
     for (x = 0; x < gridSize; x++) {
       for (y = 0; y < gridSize; y++) {
-        result = vpTree.search(List<int>.from([x + 0.1, y + 0.4]), 3, double.maxFinite);
+        result = vpTree.search(SpacePoint([x + 0.1, y + 0.4]), 3, double.maxFinite);
         expect(result.length, equals(3),
             reason: "point [" + (x + 0.1) + ', ' + (y + 0.4) + ']');
         approxEqual(result[0], i, 0.41231056256176607);
@@ -115,11 +115,11 @@ void main() {
   }
 
   searchByDistance(VpTree vpTree, List<SpacePoint> elements) {
-    var result = vpTree.search(List<int>.from([1.1, 0.9]), 2, double.maxFinite);
+    var result = vpTree.search(SpacePoint([1.1, 0.9]), 2, double.maxFinite);
     expect(result.length, equals(10));
     expect(result[0], equals(11));
     expect(result[9], equals(31));
-    result = vpTree.search(List<int>.from([5.4, 3.2]), 1, double.maxFinite);
+    result = vpTree.search(SpacePoint([5.4, 3.2]), 1, double.maxFinite);
     expect(result.length, equals(4));
     expect(result[0], equals(53));
     expect(result[1], equals(63));

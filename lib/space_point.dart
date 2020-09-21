@@ -1,15 +1,15 @@
 class SpacePoint {
-  List<int> coords;
+  List<double> coords;
 
-  SpacePoint(List<int> coords) {
+  SpacePoint(List<double> coords) {
     var coords = this.coords;
   }
 
   factory SpacePoint.fromJson(Map<String, dynamic> json) {
     List<dynamic> coordsRaw = json['coords'];
-    var coords = List<int>();
+    var coords = List<double>();
     coordsRaw.forEach((coordRaw) {
-      if (coordRaw is int) {
+      if (coordRaw is double) {
         coords.add(coordRaw);
       }
     });
