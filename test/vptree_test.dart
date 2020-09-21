@@ -13,8 +13,8 @@ void main() {
         reason: "${actualResult.priority} +  pour + $expectedDistance + attendu");
   }
 
-  euclidean2(List<int> a, List<int> b) {
-    var dx = a[0] - b[0], dy = a[1] - b[1];
+  euclidean2(SpacePoint a, SpacePoint  b) {
+    var dx = a.coords[0] - b.coords[0], dy = a.coords[1] - b.coords[1];
     return Math.sqrt(dx * dx + dy * dy);
   }
 
@@ -41,8 +41,8 @@ void main() {
   searchNearestOne(VpTree vpTree, List<SpacePoint> elements) {
     for (var i = 0, n = elements.length; i < n; i++) {
       var point = elements[i],
-          x = point[0],
-          y = point[1],
+          x = point.coords[0],
+          y = point.coords[1],
           result = vpTree.search(SpacePoint([x + 0.1, y + 0.4]), 0, double.maxFinite);
       expect(result.length, equals(1),
           reason: "point [" +
