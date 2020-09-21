@@ -1,7 +1,9 @@
 import 'package:test/test.dart';
+import 'package:vptree/space_point.dart';
+import 'dart:math' as Math;
 import '../lib/vptree.dart';
 import '../lib/vptree_factory.dart';
-import 'dart:math' as Math;
+import '../lib/space_point.dart';
 import '../lib/priority_queue_item.dart';
 
 void main() {
@@ -17,11 +19,11 @@ void main() {
     return Math.sqrt(dx * dx + dy * dy);
   }
 
-  buildElements() {
-    var elements = List<List<int>>();
+  List<SpacePoint> buildElements() {
+    var elements = List<SpacePoint>();
     for (var x = 0; x < gridSize; x++) {
       for (var y = 0; y < gridSize; y++) {
-        elements.add([x, y]);
+        elements.add(SpacePoint([x, y]));
       }
     }
     return elements;
