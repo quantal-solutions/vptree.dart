@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:math';
 import './vptree_node.dart';
 import './vptree.dart';
+import './space_point.dart';
 
 class VpTreeFactory {
   VpTree build(List<SpacePoint> elements, int bucketSize,
@@ -19,7 +20,7 @@ class VpTreeFactory {
       List<SpacePoint> elements,
       List<VpTreeNode> nodeList,
       int bucketSize,
-      Function(List<int>, List<int>) computeDistanceCallback) {
+      Function(SpacePoint, SpacePoint) computeDistanceCallback) {
     if (nodeList.length == 0) {
       return null;
     }
