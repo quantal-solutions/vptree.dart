@@ -72,7 +72,7 @@ class VpTree {
   }
 
   String stringify() {
-    return json.encode(toJson());
+    return json.encode(this);
   }
 
   factory VpTree.fromJson(Map<String, dynamic> json,
@@ -101,6 +101,6 @@ class VpTree {
 
   Map<String, dynamic> toJson() => {
     'spacePoints': this.spacePoints, 
-    'treeNodes': this.treeNodes.map((treeNodes) => treeNodes.toJson())
+    'treeNodes': this.treeNodes
   };
 }
