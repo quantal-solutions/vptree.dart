@@ -1,5 +1,4 @@
 import 'package:test/test.dart';
-import 'package:vptree/space_point.dart';
 import 'dart:math' as Math;
 import '../lib/vptree.dart';
 import '../lib/vptree_factory.dart';
@@ -29,7 +28,7 @@ void main() {
     return elements;
   }
 
-  searchElements(VpTree vpTree, List<List<int>> elements) {
+  searchElements(VpTree vpTree, List<SpacePoint> elements) {
     List<PriorityQueueItem> result;
     for (var i = 0, n = elements.length; i < n; i++) {
       result = vpTree.search(elements[i], 1, double.maxFinite);
@@ -39,7 +38,7 @@ void main() {
     }
   }
 
-  searchNearestOne(VpTree vpTree, List<List<int>> elements) {
+  searchNearestOne(VpTree vpTree, List<SpacePoint> elements) {
     for (var i = 0, n = elements.length; i < n; i++) {
       var point = elements[i],
           x = point[0],
@@ -55,7 +54,7 @@ void main() {
     }
   }
 
-  searchNearestTwo(VpTree vpTree, List<List<int>> elements) {
+  searchNearestTwo(VpTree vpTree, List<SpacePoint> elements) {
     var x, y, i = 0, result, expected, expectedDistance;
     for (x = 0; x < gridSize; x++) {
       for (y = 0; y < gridSize; y++) {
@@ -80,7 +79,7 @@ void main() {
     }
   }
 
-  searchNearestThree(VpTree vpTree, List<List<int>> elements) {
+  searchNearestThree(VpTree vpTree, List<SpacePoint> elements) {
     var x, y, i = 0, result, expected, expectedDistance;
     for (x = 0; x < gridSize; x++) {
       for (y = 0; y < gridSize; y++) {
@@ -115,7 +114,7 @@ void main() {
     }
   }
 
-  searchByDistance(VpTree vpTree, List<List<int>> elements) {
+  searchByDistance(VpTree vpTree, List<SpacePoint> elements) {
     var result = vpTree.search(List<int>.from([1.1, 0.9]), 2, double.maxFinite);
     expect(result.length, equals(10));
     expect(result[0], equals(11));
