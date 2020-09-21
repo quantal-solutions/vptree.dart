@@ -4,8 +4,8 @@ import './vptree_node.dart';
 import './vptree.dart';
 
 class VpTreeFactory {
-  VpTree build(List<List<int>> elements, int bucketSize,
-      Function(List<int>, List<int>) computeDistanceCallback) {
+  VpTree build(List<SpacePoint> elements, int bucketSize,
+      Function(SpacePoint, SpacePoint)computeDistanceCallback) {
     var nodeList = List<VpTreeNode>();
     for (var i = 0, n = elements.length; i < n; i++) {
       nodeList.add(VpTreeNode(i));
@@ -16,7 +16,7 @@ class VpTreeFactory {
   }
 
   List<VpTreeNode> recurseVPTree(
-      List<List<int>> elements,
+      List<SpacePoint> elements,
       List<VpTreeNode> nodeList,
       int bucketSize,
       Function(List<int>, List<int>) computeDistanceCallback) {
@@ -130,8 +130,8 @@ class VpTreeFactory {
     return (Random().nextInt(1) * nodeList.length).floor().toInt();
   }
 
-  VpTree load(List<List<int>> elements, String stringifiedTree,
-      Function(List<int>, List<int>) computeDistanceCallback) {
+  VpTree load(List<SpacePoint> elements, String stringifiedTree,
+      Function(SpacePoint, SpacePoint) computeDistanceCallback) {
     return new VpTree(elements, json.decode(stringifiedTree), computeDistanceCallback);
   }
 
