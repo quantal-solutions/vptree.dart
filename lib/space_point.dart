@@ -2,7 +2,7 @@ class SpacePoint {
   List<double> coords;
 
   SpacePoint(List<double> coords) {
-    var coords = this.coords;
+    this.coords = coords;
   }
 
   factory SpacePoint.fromJson(Map<String, dynamic> json) {
