@@ -22,7 +22,7 @@ void main() {
     var elements = List<SpacePoint>();
     for (var x = 0; x < gridSize; x++) {
       for (var y = 0; y < gridSize; y++) {
-        elements.add(SpacePoint([x, y]));
+        elements.add(SpacePoint([x.toDouble(), y.toDouble()]));
       }
     }
     return elements;
@@ -255,8 +255,8 @@ void main() {
 
   test('Stringify', () {
     var vpTree = new VpTreeFactory().build([
-      [0, 0],
-      [1, 1]
+      SpacePoint([0, 0]),
+      SpacePoint([1, 1])
     ], 10, euclidean2);
     var str = vpTree.stringify();
     var expected = vpTree.toJson().toString();
