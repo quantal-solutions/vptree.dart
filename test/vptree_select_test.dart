@@ -98,8 +98,8 @@ void main() {
     var logN = 3;
     var P = 7;
 
-    compLast(x, y) {
-      return x % 10 < y % 10;
+    compLast(VpTreeNode x, VpTreeNode y) {
+      return x.i % 10 < y.i % 10;
     }
 
     var s1 = B;

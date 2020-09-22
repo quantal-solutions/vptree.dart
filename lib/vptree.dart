@@ -26,7 +26,7 @@ class VpTree {
     var comparisons = 0;
 
     doSearch(List<VpTreeNode> treeNodes) {
-      if (treeNodes == null) return;
+      if (treeNodes == null || treeNodes.isEmpty) return;
 
       if (treeNodes.length > 1) {
         for (var i = 0, n = treeNodes.length; i < n; i++) {
