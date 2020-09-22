@@ -19,19 +19,15 @@ class VpTreeNode {
     vpTreeNode.mu = json['mu'];
 
     List<dynamic> treeNodesLRaw = json['L'];
-    var treeNodesL = List<VpTreeNode>();
-    treeNodesLRaw.forEach((treeNodeRaw) {
-      var treeNode = VpTreeNode.fromJson(treeNodeRaw);
-      treeNodesL.add(treeNode);
-    });
+    var treeNodesL = treeNodesLRaw != null
+      ? treeNodesLRaw.map((treeNode) => VpTreeNode.fromJson(treeNode)).toList()
+      : List<VpTreeNode>();
     vpTreeNode.L = treeNodesL;
 
     List<dynamic> treeNodesRRaw = json['R'];
-    var treeNodesR = List<VpTreeNode>();
-    treeNodesRRaw.forEach((treeNodeRaw) {
-      var treeNode = VpTreeNode.fromJson(treeNodeRaw);
-      treeNodesR.add(treeNode);
-    });
+    var treeNodesR = treeNodesRRaw != null
+      ? treeNodesRRaw.map((treeNode) => VpTreeNode.fromJson(treeNode)).toList()
+      : List<VpTreeNode>();
     vpTreeNode.R = treeNodesR;
 
     vpTreeNode.dist = json['dist'];

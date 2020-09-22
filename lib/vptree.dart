@@ -77,25 +77,14 @@ class VpTree {
 
   factory VpTree.fromJson(Map<String, dynamic> json,
       Function(SpacePoint, SpacePoint) computeDistanceCallback) {
-    List<dynamic> elementsRaw = json['spacePoints'];
-    var spacePoints = List<SpacePoint>();
-    elementsRaw.forEach((elementContents) {
-      var coords = List<int>();
-      if (elementContents is List) {
-        elementContents.forEach((elementContents) {
-          if (elementContents is int) {
-            coords.add(elementContents);
-          }
-        });
-      }
-      elementContents.add(coords);
-    });
+    List<dynamic> spacePointsRaw = json['spacePoints'];
+    var spacePoints = spacePointsRaw != null
+      ? spacePointsRaw.map((spacePoint) => SpacePoint.fromJson(spacePoint)).toList()
+      : List<SpacePoint>();
     List<dynamic> treeNodesRaw = json['treeNodes'];
-    var treeNodes = List<VpTreeNode>();
-    treeNodesRaw.forEach((treeNodeRaw) {
-      var treeNode = VpTreeNode.fromJson(treeNodeRaw);
-      treeNodes.add(treeNode);
-    });
+    var treeNodes = treeNodesRaw != null
+      ? treeNodesRaw.map((treeNode) => VpTreeNode.fromJson(treeNode)).toList()
+      : List<VpTreeNode>();
     return VpTree(spacePoints, treeNodes, computeDistanceCallback);
   }
 

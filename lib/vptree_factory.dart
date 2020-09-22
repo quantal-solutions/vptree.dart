@@ -6,7 +6,7 @@ import './space_point.dart';
 
 class VpTreeFactory {
   VpTree build(List<SpacePoint> elements, int bucketSize,
-      Function(SpacePoint, SpacePoint)computeDistanceCallback) {
+      Function(SpacePoint, SpacePoint) computeDistanceCallback) {
     var nodeList = List<VpTreeNode>();
     for (var i = 0, n = elements.length; i < n; i++) {
       nodeList.add(VpTreeNode(i));
@@ -69,7 +69,7 @@ class VpTreeFactory {
         recurseVPTree(elements, leftItems, bucketSize, computeDistanceCallback);
     node.R = recurseVPTree(
         elements, rightItems, bucketSize, computeDistanceCallback);
-    node.isReady = true;    
+    node.isReady = true;
     return [node];
   }
 
@@ -131,9 +131,13 @@ class VpTreeFactory {
     return (Random().nextInt(1) * nodeList.length).floor().toInt();
   }
 
-  VpTree load(List<SpacePoint> elements, String stringifiedTree,
+  VpTree load(List<SpacePoint> spacePoints, String stringifiedTree,
       Function(SpacePoint, SpacePoint) computeDistanceCallback) {
-    return new VpTree(elements, json.decode(stringifiedTree), computeDistanceCallback);
+    var vpTree = VpTree.fromJson(json.decode(stringifiedTree), computeDistanceCallback);
+    return new VpTree(
+        spacePoints,
+        vpTree.treeNodes,
+        computeDistanceCallback);
   }
 
   infComparator(int a, int b) {

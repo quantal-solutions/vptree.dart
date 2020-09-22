@@ -7,16 +7,11 @@ class SpacePoint {
 
   factory SpacePoint.fromJson(Map<String, dynamic> json) {
     List<dynamic> coordsRaw = json['coords'];
-    var coords = List<double>();
-    coordsRaw.forEach((coordRaw) {
-      if (coordRaw is double) {
-        coords.add(coordRaw);
-      }
-    });
+    var coords = coordsRaw != null
+        ? coordsRaw.map((coords) => coords as double).toList()
+        : List<double>();
     return SpacePoint(coords);
   }
-  
-  Map<String, dynamic> toJson() => {
-    'coords': this.coords
-  };
+
+  Map<String, dynamic> toJson() => {'coords': this.coords};
 }
