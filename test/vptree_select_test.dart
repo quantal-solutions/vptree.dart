@@ -18,7 +18,7 @@ void main() {
       VpTreeNode(0)
     ];
     VpTreeFactory().select(array, 3, infComparator);
-    expect(array[3], equals(3));
+    expect(array[3].i, equals(3));
     for (var i = 0; i < 3; i++) {
       expect(array[i].i < array[3].i, equals(true),
           reason: 'Left elements must be < 3');
@@ -40,7 +40,7 @@ void main() {
       VpTreeNode(3)
     ];
     VpTreeFactory().select(array, 3, infComparator);
-    expect(array[3], equals(3));
+    expect(array[3].i, equals(3));
     for (var i = 0; i < 3; i++) {
       expect(array[i].i < array[3].i, equals(true),
           reason: 'Left elements must be < 3');
@@ -125,7 +125,7 @@ void main() {
     expect(pivot, equals(30));
     for (var i = 0; i < 3; i++) {
       expect(list[i].i < 30, equals(true));
-      expect(list[3], equals(30));
+      expect(list[3].i, equals(30));
     }
     for (var i = 4; i < 8; i++) {
       expect(list[i].i > 30, equals(true));
