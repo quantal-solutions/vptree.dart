@@ -45,11 +45,7 @@ void main() {
           y = point.coords[1],
           result = vpTree.search(SpacePoint([x + 0.1, y + 0.4]), 1, double.maxFinite);
       expect(result.length, equals(1),
-          reason: "point [" +
-              (x + 0.1).toString() +
-              ', ' +
-              (y + 0.4).toString() +
-              ']');
+          reason: "point [${(x + 0.1)}, ${(y + 0.4)}]");
       approxEqual(result[0], i, 0.41231056256176607);
     }
   }
@@ -60,7 +56,7 @@ void main() {
       for (y = 0; y < gridSize; y++) {
         result = vpTree.search(SpacePoint([x + 0.1, y + 0.4]), 2, double.maxFinite);
         expect(result.length, equals(2),
-            reason: "point [" + (x + 0.1) + ', ' + (y + 0.4) + ']');
+            reason: "point [${(x + 0.1)}, ${(y + 0.4)}]");
         approxEqual(result[0], i, 0.41231056256176607);
         expected = i + 1;
         expectedDistance = 0.6082762530298219;
@@ -85,7 +81,7 @@ void main() {
       for (y = 0; y < gridSize; y++) {
         result = vpTree.search(SpacePoint([x + 0.1, y + 0.4]), 3, double.maxFinite);
         expect(result.length, equals(3),
-            reason: "point [" + (x + 0.1) + ', ' + (y + 0.4) + ']');
+            reason: "point [${(x + 0.1)}, ${(y + 0.4)}]");
         approxEqual(result[0], i, 0.41231056256176607);
         expected = i + 1;
         expectedDistance = 0.6082762530298219;
