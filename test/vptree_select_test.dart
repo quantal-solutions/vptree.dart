@@ -122,7 +122,7 @@ void main() {
     VpTreeNode(10), VpTreeNode(69), 
     VpTreeNode(96), VpTreeNode(100)];
     var pivot = VpTreeFactory().select(list, 3, infComparator);
-    expect(pivot, equals(30));
+    expect(pivot.i, equals(30));
     for (var i = 0; i < 3; i++) {
       expect(list[i].i < 30, equals(true));
       expect(list[3].i, equals(30));
@@ -135,7 +135,7 @@ void main() {
   test('Single Element Test', () {
     List<VpTreeNode> list = [VpTreeNode(5)];
     var pivot = VpTreeFactory().select(list, 0, infComparator);
-    expect(pivot, equals(5));
-    expect(list, equals([5]));
+    expect(pivot.i, equals(5));
+    expect(list, equals([pivot]));
   });
 }

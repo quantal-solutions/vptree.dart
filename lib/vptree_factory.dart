@@ -73,8 +73,11 @@ class VpTreeFactory {
     return [node];
   }
 
-  findNthElement(List<VpTreeNode> nodeList, int left, int nth, int right,
-      Function(VpTreeNode, VpTreeNode) comp) {
+  VpTreeNode findNthElement(List<VpTreeNode> nodeList, 
+                            int left, 
+                            int nth, 
+                            int right,
+                            Function(VpTreeNode, VpTreeNode) comp) {
     if (nth <= 0 || nth > (right - left + 1))
       throw ("VPTree.nth_element: nth must be in range [1, right-left+1] (nth=$nth)");
     var pivotIndex;
@@ -144,8 +147,9 @@ class VpTreeFactory {
     return a < b;
   }
 
-  select(
-      List<VpTreeNode> nodeList, int k, Function(VpTreeNode, VpTreeNode) comp) {
+  VpTreeNode select(List<VpTreeNode> nodeList, 
+                    int k, 
+                    Function(VpTreeNode, VpTreeNode) comp) {
     if (k < 0 || k >= nodeList.length) {
       throw ("VPTree.select: k must be in range [0, list.length-1] (k=$k)");
     }
