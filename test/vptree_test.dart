@@ -111,11 +111,11 @@ void main() {
   }
 
   searchByDistance(VpTree vpTree, List<SpacePoint> elements) {
-    var result = vpTree.search(SpacePoint([1.1, 0.9]), 2, double.maxFinite);
+    var result = vpTree.search(SpacePoint([1.1, 0.9]), double.maxFinite.toInt(), 2);
     expect(result.length, equals(10));
     expect(result[0], equals(11));
     expect(result[9], equals(31));
-    result = vpTree.search(SpacePoint([5.4, 3.2]), 1, double.maxFinite);
+    result = vpTree.search(SpacePoint([5.4, 3.2]), double.maxFinite.toInt(), 1);
     expect(result.length, equals(4));
     expect(result[0], equals(53));
     expect(result[1], equals(63));
