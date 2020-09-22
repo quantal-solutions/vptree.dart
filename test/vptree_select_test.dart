@@ -1,4 +1,5 @@
 import 'package:test/test.dart';
+import 'package:collection/collection.dart';
 import '../lib/vptree_factory.dart';
 import '../lib/vptree_node.dart';
 
@@ -136,6 +137,6 @@ void main() {
     List<VpTreeNode> list = [VpTreeNode(5)];
     var pivot = VpTreeFactory().select(list, 0, infComparator);
     expect(pivot.i, equals(5));
-    expect(list, equals([pivot]));
+    expect(ListEquality().equals(list, [pivot]), equals(true));
   });
 }
