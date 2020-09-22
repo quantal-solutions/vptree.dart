@@ -43,7 +43,7 @@ void main() {
       var point = elements[i],
           x = point.coords[0],
           y = point.coords[1],
-          result = vpTree.search(SpacePoint([x + 0.1, y + 0.4]), 0, double.maxFinite);
+          result = vpTree.search(SpacePoint([x + 0.1, y + 0.4]), 1, double.maxFinite);
       expect(result.length, equals(1),
           reason: "point [" +
               (x + 0.1).toString() +
