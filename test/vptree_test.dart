@@ -248,7 +248,8 @@ void main() {
       SpacePoint([1, 1])
     ], 10, euclidean2);
     var str = vpTree.stringify();
-    var expected = vpTree.toJson().toString();
+    var expected = "{\"spacePoints\":[{\"coords\":[0.0,0.0]},{\"coords\":[1.0,1.0]}],\"treeNodes\":[{\"i\":0,\"min\":null,\"max\":null,\"mu\":null,\"L\":null,\"R\":null,\"dist\":null,\"isReady\":false},{\"i\":1,\"min\":null,\"max\":null,\"mu\":null,\"L\":null,\"R\":null,\"dist\":null,\"isReady\":false}]}";
+    
     expect(str, equals(expected));
   });
 }
