@@ -1,4 +1,5 @@
 import 'priority_queue_item.dart';
+import 'space_point.dart';
 
 class PriorityQueue {
   var size = 5;
@@ -33,7 +34,7 @@ class PriorityQueue {
     return contents.length;
   }
 
-  double insert(int data, double priority) {
+  double insert(SpacePoint data, double priority) {
     var index = binaryIndexOf(priority);
     if (index < 0) index = -1 - index;
     if (index < size) {
