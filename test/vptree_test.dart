@@ -3,12 +3,13 @@ import 'dart:math' as Math;
 import '../lib/vptree.dart';
 import '../lib/vptree_factory.dart';
 import '../lib/space_point.dart';
+import '../lib/index_space_point.dart';
 import '../lib/priority_queue_item.dart';
 
 void main() {
   const gridSize = 10;
   approxEqual(PriorityQueueItem actualResult, int expectedIndex, double expectedDistance) {
-    expect(actualResult.data, equals(expectedIndex));
+    expect((actualResult.data as IndexSpacePoint).index, equals(expectedIndex));
     expect((actualResult.priority - expectedDistance).abs() < 1e-10, equals(true),
         reason: "${actualResult.priority} +  pour + $expectedDistance + attendu");
   }
@@ -20,9 +21,10 @@ void main() {
 
   List<SpacePoint> buildElements() {
     var elements = List<SpacePoint>();
+    var i = 0;
     for (var x = 0; x < gridSize; x++) {
       for (var y = 0; y < gridSize; y++) {
-        elements.add(SpacePoint([x.toDouble(), y.toDouble()]));
+        elements.add(IndexSpacePoint(i++, [x.toDouble(), y.toDouble()]));
       }
     }
     return elements;
@@ -113,14 +115,14 @@ void main() {
   searchByDistance(VpTree vpTree, List<SpacePoint> elements) {
     var result = vpTree.search(SpacePoint([1.1, 0.9]), double.maxFinite.toInt(), 2);
     expect(result.length, equals(10));
-    expect(result[0].data, equals(11));
-    expect(result[9].data, equals(31));
+    expect((result[0].data as IndexSpacePoint).index, equals(11));
+    expect((result[9].data as IndexSpacePoint).index, equals(31));
     result = vpTree.search(SpacePoint([5.4, 3.2]), double.maxFinite.toInt(), 1);
     expect(result.length, equals(4));
-    expect(result[0].data, equals(53));
-    expect(result[1].data, equals(63));
-    expect(result[2].data, equals(54));
-    expect(result[3].data, equals(64));
+    expect((result[0].data as IndexSpacePoint).index, equals(53));
+    expect((result[1].data as IndexSpacePoint).index, equals(63));
+    expect((result[2].data as IndexSpacePoint).index, equals(54));
+    expect((result[3].data as IndexSpacePoint).index, equals(64));
   }
 
   test('Search elements - no buckets', () {
