@@ -35,7 +35,7 @@ class VpTree {
               element = spacePoints[elementID],
               elementDist = computeDistanceCallback(querySpacePoint, element);
           if (elementDist < modMaxDistance) {
-            var insertedDistance = priorityQueue.insert(element, elementDist);            
+            var insertedDistance = priorityQueue.insert(element, elementDist);
             modMaxDistance =
                 insertedDistance != null ? insertedDistance : modMaxDistance;
           }

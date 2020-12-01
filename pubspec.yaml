@@ -1,8 +1,7 @@
 name: vptree
-description: A new Flutter package project.
-version: 0.0.1
-author:
-
+description: Dart implementation for efficient neighbour search based on vantage-point (VpTree) data structure to be used in Flutter projects.
+version: 0.1.0
+repository: https://github.com/quantal-solutions/vptree.dart 
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
